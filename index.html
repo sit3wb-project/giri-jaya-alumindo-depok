@@ -1,0 +1,591 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Giri Jaya Alumindo | Kusen Aluminium, Kaca, Pintu Engineering & Las</title>
+    <meta
+      name="description"
+      content="Giri Jaya Alumindo melayani pembuatan, pemasangan, dan perbaikan kusen aluminium, kaca & cermin, pintu engineering/besi, pagar & teralis, kanopi, balkon & railing, hingga stainless steel. Pengerjaan rapi, presisi, bergaransi."
+    />
+    <style>
+      :root{
+        --bg: #0b1220;
+        --surface: rgba(255,255,255,.06);
+        --surface-2: rgba(255,255,255,.09);
+        --text: #e8eefc;
+        --muted: rgba(232,238,252,.75);
+        --brand: #f5c542;       /* kuning industrial */
+        --brand-2: #2ad1ff;     /* aksen teknis */
+        --stroke: rgba(255,255,255,.14);
+        --shadow: 0 16px 40px rgba(0,0,0,.35);
+        --radius: 18px;
+        --radius-sm: 14px;
+      }
+
+      *{ box-sizing: border-box; }
+      html,body{ height:100%; }
+      body{
+        margin:0;
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Liberation Sans", sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(1100px 600px at 20% 0%, rgba(42,209,255,.14), transparent 60%),
+          radial-gradient(900px 520px at 80% 20%, rgba(245,197,66,.12), transparent 55%),
+          linear-gradient(180deg, #070b14 0%, var(--bg) 45%, #070b14 100%);
+        line-height: 1.55;
+      }
+
+      a{ color: inherit; }
+      .container{ width:min(1120px, calc(100% - 40px)); margin: 0 auto; }
+
+      /* Header */
+      header{
+        position: sticky;
+        top:0;
+        z-index: 10;
+        backdrop-filter: blur(14px);
+        background: rgba(7,11,20,.55);
+        border-bottom: 1px solid rgba(255,255,255,.08);
+      }
+      .nav{
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        padding: 14px 0;
+        gap: 14px;
+      }
+      .brand{
+        display:flex;
+        flex-direction:column;
+        gap:2px;
+      }
+      .brand strong{
+        letter-spacing: .8px;
+        font-size: 14px;
+        text-transform: uppercase;
+      }
+      .brand span{
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .navlinks{
+        display:flex;
+        flex-wrap:wrap;
+        gap: 10px 12px;
+        align-items:center;
+        justify-content:flex-end;
+      }
+      .pill{
+        text-decoration:none;
+        padding: 8px 12px;
+        border: 1px solid rgba(255,255,255,.12);
+        border-radius: 999px;
+        color: var(--muted);
+        font-size: 13px;
+        transition: .15s ease;
+      }
+      .pill:hover{ border-color: rgba(245,197,66,.5); color: var(--text); }
+
+      /* Hero */
+      .hero{
+        padding: 44px 0 26px;
+      }
+      .heroGrid{
+        display:grid;
+        grid-template-columns: 1.2fr .8fr;
+        gap: 22px;
+        align-items: stretch;
+      }
+      .card{
+        background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+        border: 1px solid rgba(255,255,255,.12);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+      }
+      .heroMain{
+        padding: 26px 26px 22px;
+        position:relative;
+        overflow:hidden;
+      }
+      .tag{
+        display:inline-flex;
+        align-items:center;
+        gap: 10px;
+        padding: 7px 12px;
+        border-radius: 999px;
+        background: rgba(245,197,66,.14);
+        border: 1px solid rgba(245,197,66,.28);
+        color: #ffe9a7;
+        font-weight: 600;
+        letter-spacing: .2px;
+        font-size: 13px;
+      }
+      .heroTitle{
+        margin: 14px 0 8px;
+        font-size: clamp(28px, 3vw, 44px);
+        line-height: 1.12;
+        letter-spacing: .2px;
+      }
+      .heroTitle em{
+        font-style: normal;
+        color: var(--brand);
+        text-shadow: 0 0 24px rgba(245,197,66,.18);
+      }
+      .heroSub{
+        margin: 0;
+        color: var(--muted);
+        font-size: 15px;
+        max-width: 60ch;
+      }
+      .ctaRow{
+        margin-top: 18px;
+        display:flex;
+        flex-wrap:wrap;
+        gap: 10px;
+        align-items:center;
+      }
+      .btn{
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        gap: 10px;
+        text-decoration:none;
+        padding: 11px 14px;
+        border-radius: 14px;
+        border: 1px solid rgba(255,255,255,.14);
+        background: rgba(255,255,255,.06);
+        color: var(--text);
+        font-weight: 700;
+        font-size: 14px;
+        transition: .15s ease;
+      }
+      .btn:hover{ transform: translateY(-1px); border-color: rgba(255,255,255,.24); }
+      .btnPrimary{
+        background: linear-gradient(90deg, rgba(245,197,66,.95), rgba(245,197,66,.72));
+        border-color: rgba(245,197,66,.6);
+        color: #1a1200;
+      }
+      .btnPrimary:hover{ border-color: rgba(245,197,66,.85); }
+      .metaRow{
+        margin-top: 14px;
+        display:flex;
+        flex-wrap:wrap;
+        gap: 10px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .meta{
+        display:inline-flex;
+        align-items:center;
+        gap: 8px;
+        padding: 8px 10px;
+        border-radius: 12px;
+        border: 1px dashed rgba(255,255,255,.14);
+        background: rgba(255,255,255,.04);
+      }
+
+      .heroAside{
+        padding: 16px;
+        display:flex;
+        flex-direction:column;
+        gap: 12px;
+      }
+      .photo{
+        border-radius: 14px;
+        overflow:hidden;
+        border: 1px solid rgba(255,255,255,.12);
+        background: rgba(0,0,0,.2);
+      }
+      .photo img{
+        width:100%;
+        height: 220px;
+        object-fit: cover;
+        display:block;
+      }
+      .asideBox{
+        border-radius: 14px;
+        border: 1px solid rgba(255,255,255,.12);
+        background: rgba(255,255,255,.04);
+        padding: 14px;
+      }
+      .asideBox h3{
+        margin:0 0 8px;
+        font-size: 14px;
+        letter-spacing: .3px;
+        text-transform: uppercase;
+        color: rgba(232,238,252,.9);
+      }
+      .checks{
+        list-style:none;
+        padding:0;
+        margin:0;
+        display:grid;
+        gap: 8px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+      .checks li{
+        display:flex;
+        gap: 10px;
+        align-items:flex-start;
+      }
+      .dot{
+        margin-top: 7px;
+        width: 9px;
+        height: 9px;
+        border-radius: 3px;
+        background: var(--brand);
+        box-shadow: 0 0 14px rgba(245,197,66,.25);
+        flex: 0 0 auto;
+      }
+
+      /* Sections */
+      section{ padding: 26px 0; }
+      .sectionTitle{
+        margin: 0 0 12px;
+        font-size: 22px;
+        letter-spacing: .2px;
+      }
+      .sectionLead{
+        margin: 0 0 16px;
+        color: var(--muted);
+        max-width: 80ch;
+      }
+
+      .grid3{
+        display:grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+      }
+      .grid2{
+        display:grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+      }
+
+      .tile{
+        padding: 16px;
+        border-radius: var(--radius-sm);
+        border: 1px solid rgba(255,255,255,.12);
+        background: rgba(255,255,255,.04);
+      }
+      .tile h3{ margin: 0 0 6px; font-size: 16px; }
+      .tile p{ margin: 0 0 10px; color: var(--muted); font-size: 14px; }
+      .tile ul{
+        margin: 0;
+        padding-left: 18px;
+        color: var(--muted);
+        font-size: 14px;
+        display:grid;
+        gap: 6px;
+      }
+      .icon{
+        width: 36px;
+        height: 36px;
+        border-radius: 12px;
+        display:grid;
+        place-items:center;
+        background: rgba(42,209,255,.10);
+        border: 1px solid rgba(42,209,255,.22);
+        color: rgba(232,238,252,.95);
+        margin-bottom: 10px;
+        font-weight: 900;
+        letter-spacing:.4px;
+      }
+
+      .contactWrap{
+        display:grid;
+        grid-template-columns: 1.1fr .9fr;
+        gap: 14px;
+        align-items: stretch;
+      }
+      .contactCard{
+        padding: 18px;
+      }
+      .contactCard h3{ margin: 0 0 10px; font-size: 18px; }
+      .contactList{
+        margin: 0;
+        padding: 0;
+        list-style:none;
+        display:grid;
+        gap: 10px;
+        color: var(--muted);
+      }
+      .contactList a{ color: var(--text); font-weight: 700; text-decoration:none; }
+      .contactList a:hover{ text-decoration: underline; }
+      .small{ font-size: 13px; color: var(--muted); }
+
+      footer{
+        padding: 26px 0 46px;
+        border-top: 1px solid rgba(255,255,255,.08);
+        color: rgba(232,238,252,.6);
+        font-size: 13px;
+      }
+
+      /* Responsive */
+      @media (max-width: 900px){
+        .heroGrid{ grid-template-columns: 1fr; }
+        .grid3{ grid-template-columns: 1fr; }
+        .grid2{ grid-template-columns: 1fr; }
+        .contactWrap{ grid-template-columns: 1fr; }
+        .photo img{ height: 210px; }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="nav">
+          <div class="brand">
+            <strong>Giri Jaya Alumindo</strong>
+            <span>Spesialis Aluminium • Kaca • Pintu Engineering • Las</span>
+          </div>
+          <nav class="navlinks" aria-label="Navigasi">
+            <a class="pill" href="#layanan">Layanan</a>
+            <a class="pill" href="#keunggulan">Keunggulan</a>
+            <a class="pill" href="#tentang">Tentang</a>
+            <a class="pill" href="#kontak">Kontak</a>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div class="hero">
+        <div class="container">
+          <div class="heroGrid">
+            <div class="card heroMain">
+              <div class="tag">Solusi lengkap aluminium & kaca</div>
+              <h1 class="heroTitle">
+                Kusen Aluminium, Kaca, Pintu Engineering &amp; Las
+                <br />
+                <em>Rapi • Kuat • Awet</em>
+              </h1>
+              <p class="heroSub">
+                Untuk rumah, kantor, maupun bangunan komersial. Kami mengutamakan kualitas bahan, presisi kerja, dan hasil akhir yang
+                bersih sesuai selera Anda.
+              </p>
+
+              <div class="ctaRow" role="group" aria-label="Aksi cepat">
+                <a class="btn btnPrimary" href="https://wa.me/6281225345030" target="_blank" rel="noopener">WhatsApp 1</a>
+                <a class="btn" href="https://wa.me/6287805461022" target="_blank" rel="noopener">WhatsApp 2</a>
+                <a class="btn" href="tel:+6281225345030">Telepon</a>
+              </div>
+
+              <div class="metaRow" aria-label="Informasi ringkas">
+                <div class="meta">Konsultasi desain: <strong style="margin-left:6px;color:var(--text)">GRATIS</strong></div>
+                <div class="meta">Garansi hasil kerja</div>
+                <div class="meta">Harga transparan &amp; terjangkau</div>
+              </div>
+            </div>
+
+            <aside class="card heroAside" aria-label="Foto & keunggulan">
+              <div class="photo">
+                <img src="./giri-jaya-sample.png" alt="Contoh pekerjaan Giri Jaya Alumindo" />
+              </div>
+              <div class="asideBox" id="keunggulan">
+                <h3>Keunggulan Kami</h3>
+                <ul class="checks">
+                  <li><span class="dot" aria-hidden="true"></span> Bahan berkualitas terbaik (standar industri)</li>
+                  <li><span class="dot" aria-hidden="true"></span> Pengerjaan rapi &amp; presisi</li>
+                  <li><span class="dot" aria-hidden="true"></span> Harga jujur, transparan, dan bisa disesuaikan kebutuhan</li>
+                  <li><span class="dot" aria-hidden="true"></span> Garansi hasil kerja &amp; respons cepat jika ada kendala</li>
+                </ul>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+
+      <section id="tentang">
+        <div class="container">
+          <h2 class="sectionTitle">Tentang Kami</h2>
+          <p class="sectionLead">
+            Giri Jaya Alumindo adalah usaha berpengalaman di bidang pembuatan, pemasangan, dan perbaikan produk berbahan aluminium, kaca,
+            besi, dan stainless steel. Kami percaya bangunan yang baik tidak hanya kokoh, tetapi juga indah dan nyaman—karena itu detail
+            pekerjaan selalu kami utamakan.
+          </p>
+          <div class="grid2">
+            <div class="tile">
+              <div class="icon">01</div>
+              <h3>Rapi di detail</h3>
+              <p>Sambungan halus, finishing bersih, dan ukuran presisi agar hasil terlihat premium.</p>
+              <ul>
+                <li>Pengukuran &amp; konsultasi kebutuhan</li>
+                <li>Rekomendasi model dan material</li>
+                <li>Pengerjaan sesuai standar keamanan</li>
+              </ul>
+            </div>
+            <div class="tile">
+              <div class="icon">02</div>
+              <h3>Siap untuk proyek kecil–besar</h3>
+              <p>Dari perbaikan ringan sampai instalasi lengkap untuk rumah, ruko, maupun kantor.</p>
+              <ul>
+                <li>Estimasi jelas dan transparan</li>
+                <li>Pengerjaan cepat (sesuai kondisi lapangan)</li>
+                <li>After-service jika ada masalah pasca pemasangan</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="layanan">
+        <div class="container">
+          <h2 class="sectionTitle">Daftar Layanan Kami</h2>
+          <p class="sectionLead">
+            Berikut layanan utama yang bisa Anda pesan. Jika Anda punya contoh desain, silakan kirim—atau kami bantu buatkan rancangan yang
+            sesuai.
+          </p>
+
+          <div class="grid3">
+            <article class="tile">
+              <div class="icon">A</div>
+              <h3>Kusen Aluminium</h3>
+              <p>Berbagai ukuran, ketebalan, dan warna (putih, hitam, cokelat, perak, dll). Anti karat, ringan, kuat, dan awet.</p>
+              <ul>
+                <li>Model standar, minimalis, hingga custom</li>
+                <li>Menyesuaikan bukaan pintu/jendela</li>
+              </ul>
+            </article>
+
+            <article class="tile">
+              <div class="icon">B</div>
+              <h3>Pintu &amp; Jendela Aluminium</h3>
+              <p>Tahan panas &amp; air, tidak lapuk, mudah dirawat. Cocok untuk tampilan rumah modern.</p>
+              <ul>
+                <li>Pintu ayun, geser, lipat</li>
+                <li>Jendela geser, ayun, kisi/kotak</li>
+                <li>Kombinasi kaca bening/buram/pola</li>
+              </ul>
+            </article>
+
+            <article class="tile">
+              <div class="icon">C</div>
+              <h3>Kaca &amp; Cermin</h3>
+              <p>Pemasangan kaca untuk berbagai kebutuhan interior dan eksterior.</p>
+              <ul>
+                <li>Kaca bening, buram, patri/berpola</li>
+                <li>Kaca tebal untuk keamanan</li>
+                <li>Cermin dinding, kamar mandi, hias</li>
+                <li>Potong &amp; pasang sesuai ukuran</li>
+              </ul>
+            </article>
+
+            <article class="tile">
+              <div class="icon">D</div>
+              <h3>Pintu Engineering / Konstruksi Besi</h3>
+              <p>Untuk kebutuhan keamanan ekstra dan kekuatan tinggi.</p>
+              <ul>
+                <li>Pintu besi tempa, pintu baja, pintu anti maling</li>
+                <li>Rangka atap, tangga, penyangga</li>
+                <li>Pengelasan rapi dan tahan lama</li>
+              </ul>
+            </article>
+
+            <article class="tile">
+              <div class="icon">E</div>
+              <h3>Pagar &amp; Teralis</h3>
+              <p>Gabungan keamanan dan keindahan dengan banyak pilihan model.</p>
+              <ul>
+                <li>Aluminium (ringan &amp; anti karat)</li>
+                <li>Besi/baja (sangat kuat)</li>
+                <li>Model minimalis, klasik, atau motif khusus</li>
+              </ul>
+            </article>
+
+            <article class="tile">
+              <div class="icon">F</div>
+              <h3>Kanopi, Balkon, Railing &amp; Stainless</h3>
+              <p>Solusi pelengkap bangunan agar lebih aman, rapi, dan tahan cuaca.</p>
+              <ul>
+                <li>Kanopi aluminium / baja ringan</li>
+                <li>Atap polikarbonat atau kaca</li>
+                <li>Railing tangga, railing balkon, pembatas</li>
+                <li>Pengerjaan stainless (rak, talang, meja kerja, dll)</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="kontak">
+        <div class="container">
+          <h2 class="sectionTitle">Kontak &amp; Lokasi</h2>
+          <p class="sectionLead">
+            Mau tanya harga atau konsultasi desain? Kirim ukuran/foto lokasi pemasangan via WhatsApp—kami bantu hitungkan kebutuhan dan opsi
+            materialnya.
+          </p>
+
+          <div class="contactWrap">
+            <div class="card contactCard">
+              <h3>Hubungi Kami Sekarang</h3>
+              <ul class="contactList">
+                <li>
+                  WhatsApp 1:
+                  <a href="https://wa.me/6281225345030" target="_blank" rel="noopener">0812-2534-5030</a>
+                </li>
+                <li>
+                  WhatsApp 2:
+                  <a href="https://wa.me/6287805461022" target="_blank" rel="noopener">0878-0546-1022</a>
+                </li>
+                <li>
+                  Alamat:
+                  <strong style="color:var(--text)">Jl. Pemuda RT 05/06 No. 76, Sawangan Baru</strong>
+                </li>
+              </ul>
+              <p class="small" style="margin-top:12px">
+                “Wujudkan bangunan impian Anda — kokoh, indah, dan bernilai tinggi bersama Giri Jaya Alumindo.”
+              </p>
+            </div>
+
+            <div class="card contactCard">
+              <h3>Cara Pemesanan (Singkat)</h3>
+              <ol style="margin:0; padding-left:18px; color:var(--muted); display:grid; gap:8px">
+                <li>Kirim kebutuhan + ukuran/foto lokasi via WhatsApp.</li>
+                <li>Kami rekomendasikan material &amp; model, lalu buat estimasi harga.</li>
+                <li>Survey (jika perlu) → produksi → pemasangan rapi.</li>
+                <li>Serah terima + garansi hasil kerja.</li>
+              </ol>
+              <div class="ctaRow" style="margin-top:14px">
+                <a class="btn btnPrimary" href="https://wa.me/6281225345030" target="_blank" rel="noopener">Chat WhatsApp</a>
+                <a class="btn" href="#layanan">Lihat Layanan</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center">
+          <div>© <span id="year"></span> Giri Jaya Alumindo. Semua hak dilindungi.</div>
+          <div>Spesialis: Aluminium • Kaca • Pintu Engineering • Las</div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+
+    <!-- LocalBusiness structured data (opsional untuk SEO) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Giri Jaya Alumindo",
+        "description": "Spesialis kusen aluminium, kaca & cermin, pintu engineering/besi, pagar & teralis, kanopi, balkon & railing, serta stainless steel.",
+        "telephone": ["+62 812-2534-5030", "+62 878-0546-1022"],
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Jl. Pemuda RT 05/06 No. 76, Sawangan Baru",
+          "addressCountry": "ID"
+        }
+      }
+    </script>
+  </body>
+</html>
+
