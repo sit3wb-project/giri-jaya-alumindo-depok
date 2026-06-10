@@ -3,32 +3,33 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Giri Jaya Alumindo | Kusen Aluminium, Kaca, Pintu Engineering & Las</title>
+    <title>Giri Jaya Alumindo | Kusen Alumunium, Kaca, Pintu Engineering & Las</title>
     <meta
       name="description"
       content="Giri Jaya Alumindo melayani pembuatan, pemasangan, dan perbaikan kusen aluminium, kaca & cermin, pintu engineering/besi, pagar & teralis, kanopi, balkon & railing, hingga stainless steel. Pengerjaan rapi, presisi, bergaransi."
     />
     <style>
-      :root{
+      :root {
         /* WARNA BACKGROUND CERAH BIRU LANGIT YANG LEMBUT & PREMIUM */
         --bg-sky-top: #e3f2fd;    /* Biru langit fajar yang sangat bersih */
         --bg-sky-bottom: #f7f9fc; /* Putih kebiruan teduh agar mata tidak lelah */
         --surface: rgba(255, 255, 255, 0.85);
         --surface-2: rgba(255, 255, 255, 0.95);
-        --text: #242d35;         /* Abu-abu arang gelap (kontras sempurna & ramah mata) */
-        --muted: #5a6670;        /* Warna teks sekunder yang tenang */
-        --brand: #d4a326;        /* Emas hangat berkilau */
-        --brand-2: #1e88e5;      /* Biru langit aksen */
+        --text: #242d35;          /* Abu-abu arang gelap (kontras sempurna & ramah mata) */
+        --muted: #5a6670;         /* Warna teks sekunder yang tenang */
+        --brand: #d4a326;         /* Emas hangat berkilau */
+        --brand-2: #1e88e5;       /* Biru langit aksen */
         --stroke: rgba(30, 136, 229, 0.12);
         --shadow: 0 12px 35px rgba(30, 110, 180, 0.08);
         --radius: 18px;
         --radius-sm: 14px;
+        --container-width: 1100px;
       }
 
-      *{ box-sizing: border-box; }
-      html,body{ height:100%; scroll-behavior: smooth; }
-      body{
-        margin:0;
+      * { box-sizing: border-box; }
+      html, body { height: 100%; scroll-behavior: smooth; }
+      body {
+        margin: 0;
         font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Liberation Sans", sans-serif;
         color: var(--text);
         background: linear-gradient(180deg, var(--bg-sky-top) 0%, var(--bg-sky-bottom) 100%);
@@ -64,4 +65,187 @@
       .star:nth-child(4) { width: 6px; height: 6px; left: 75%; top: 45%; animation-duration: 20s; animation-delay: 1s; }
       .star:nth-child(5) { width: 7px; height: 7px; left: 85%; top: 75%; animation-duration: 16s; animation-delay: 5s; }
       .star:nth-child(6) { width: 4px; height: 4px; left: 20%; top: 80%; animation-duration: 22s; animation-delay: 3s; }
-      .star:nth-child(7) { width: 8px; height: 8px; left: 45%; top: 50%;
+      .star:nth-child(7) { width: 8px; height: 8px; left: 45%; top: 50%; animation-duration: 15s; animation-delay: 1.5s; }
+
+      @keyframes floatAndTwinkle {
+        0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+        10% { opacity: 0.8; }
+        90% { opacity: 0.8; }
+        100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+      }
+
+      /* --- STRUKTUR LAYOUT & KONTEN --- */
+      .app-container {
+        position: relative;
+        z-index: 1;
+        max-width: var(--container-width);
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      header {
+        text-align: center;
+        padding: 60px 20px;
+        background: var(--surface);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid var(--stroke);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        margin-bottom: 40px;
+      }
+
+      .logo-text {
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin: 0;
+        color: var(--text);
+        letter-spacing: -0.5px;
+      }
+
+      .logo-text span {
+        color: var(--brand);
+      }
+
+      header p {
+        color: var(--muted);
+        font-size: 1.1rem;
+        margin: 10px 0 0 0;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      /* GRID LAYOUT UNTUK LAYANAN */
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 25px;
+        margin-bottom: 40px;
+      }
+
+      .card {
+        background: var(--surface-2);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 1px solid var(--stroke);
+        border-radius: var(--radius);
+        padding: 30px;
+        box-shadow: var(--shadow);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(30, 110, 180, 0.15);
+      }
+
+      .card h2 {
+        margin-top: 0;
+        font-size: 1.4rem;
+        color: var(--text);
+        border-left: 4px solid var(--brand-2);
+        padding-left: 12px;
+      }
+
+      .card p {
+        color: var(--muted);
+        font-size: 0.95rem;
+        margin-bottom: 0;
+      }
+
+      /* CALL TO ACTION BUTTON */
+      .cta-section {
+        text-align: center;
+        padding: 40px;
+        background: var(--surface);
+        border: 1px solid var(--stroke);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+      }
+
+      .btn-whatsapp {
+        display: inline-block;
+        background: #25d366;
+        color: #fff;
+        text-decoration: none;
+        padding: 14px 32px;
+        border-radius: var(--radius-sm);
+        font-weight: 700;
+        font-size: 1.1rem;
+        transition: background 0.3s ease;
+        box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+      }
+
+      .btn-whatsapp:hover {
+        background: #20ba59;
+      }
+
+      footer {
+        text-align: center;
+        padding: 40px 20px;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      /* RESPONSIVE ADJUSTMENT */
+      @media (max-width: 600px) {
+        .logo-text { font-size: 1.8rem; }
+        header { padding: 40px 15px; }
+        .card { padding: 20px; }
+      }
+    </style>
+  </head>
+  <body>
+
+    <div class="star-field">
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+    </div>
+
+    <div class="app-container">
+      <header>
+        <h1 class="logo-text">Giri Jaya <span>Alumindo</span></h1>
+        <p>Penyedia solusi interior & eksterior berbahan aluminium, kaca, besi, dan stainless steel berkualitas tinggi dengan pengerjaan presisi dan bergaransi.</p>
+      </header>
+
+      <main class="services-grid">
+        <div class="card">
+          <h2>Kusen & Jendela Aluminium</h2>
+          <p>Pembuatan kusen, jendela, dan pintu aluminium modern yang tahan rayap, kokoh, dan kedap suara untuk rumah serta kantor Anda.</p>
+        </div>
+
+        <div class="card">
+          <h2>Kaca & Cermin</h2>
+          <p>Pemasangan kaca temper, kaca bevel, partisi ruangan, hingga cermin dekoratif premium yang presisi dan mewah.</p>
+        </div>
+
+        <div class="card">
+          <h2>Pintu Engineering & Besi</h2>
+          <p>Solusi pintu engineering modern yang elegan serta pintu besi pengaman struktural dengan material grade terbaik.</p>
+        </div>
+
+        <div class="card">
+          <h2>Pagar, Kanopi & Las</h2>
+          <p>Pembuatan pagar minimalis, teralis jendela, kanopi modern, balkon, railing tangga, hingga custom stainless steel.</p>
+        </div>
+      </main>
+
+      <section class="cta-section">
+        <h3>Konsultasikan Kebutuhan Proyek Anda</h3>
+        <p style="color: var(--muted); margin-bottom: 25px;">Tim ahli kami siap melayani survei lokasi secara gratis dan memberikan estimasi harga terbaik.</p>
+        <a href="https://wa.me/628xxxxxxxxxx" class="btn-whatsapp" target="_blank" rel="noopener">Hubungi via WhatsApp</a>
+      </section>
+
+      <footer>
+        <p>&copy; 2026 Giri Jaya Alumindo. All Rights Reserved. Rapi - Presisi - Bergaransi.</p>
+      </footer>
+    </div>
+
+  </body>
+</html>
