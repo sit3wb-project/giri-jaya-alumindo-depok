@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Giri Jaya Alumindo | Kusen Alumunium, Kaca, Pintu Engineering & Las</title>
+    <title>Giri Jaya Alumindo | Kusen Aluminium, Kaca, Pintu Engineering & Las</title>
     <meta
       name="description"
-      content="Giri Jaya Alumindo melayani pembuatan, pemasangan, dan perbaikan kusen alumunium, kaca & cermin, pintu engineering/besi, pagar & teralis, kanopi, balkon & railing, hingga stainless steel. Pengerjaan rapi, presisi, bergaransi."
+      content="Giri Jaya Alumindo melayani pembuatan, pemasangan, dan perbaikan kusen aluminium, kaca & cermin, pintu engineering/besi, pagar & teralis, kanopi, balkon & railing, hingga stainless steel. Pengerjaan rapi, presisi, bergaransi."
     />
     <style>
       :root{
@@ -191,6 +191,8 @@
         flex-direction:column;
         gap: 12px;
       }
+      
+      /* --- BAGIAN PERBAIKAN FOTO --- */
       .photo{
         border-radius: 14px;
         overflow:hidden;
@@ -199,10 +201,12 @@
       }
       .photo img{
         width:100%;
-        height: 220px;
-        object-fit: cover;
+        height: auto;          /* Mengikuti tinggi asli gambar agar tidak terpotong */
+        object-fit: contain;   /* Memastikan gambar terlihat seutuhnya secara proporsional */
         display:block;
       }
+      /* ----------------------------- */
+
       .asideBox{
         border-radius: 14px;
         border: 1px solid rgba(255,255,255,.12);
@@ -329,7 +333,6 @@
         .grid3{ grid-template-columns: 1fr; }
         .grid2{ grid-template-columns: 1fr; }
         .contactWrap{ grid-template-columns: 1fr; }
-        .photo img{ height: 210px; }
       }
     </style>
   </head>
@@ -339,7 +342,7 @@
         <div class="nav">
           <div class="brand">
             <strong>Giri Jaya Alumindo</strong>
-            <span>Spesialis Alumunium • Kaca • Pintu Engineering • Las</span>
+            <span>Spesialis Aluminium • Kaca • Pintu Engineering • Las</span>
           </div>
           <nav class="navlinks" aria-label="Navigasi">
             <a class="pill" href="#layanan">Layanan</a>
@@ -356,9 +359,9 @@
         <div class="container">
           <div class="heroGrid">
             <div class="card heroMain">
-              <div class="tag">Solusi lengkap alumunium & kaca</div>
+              <div class="tag">Solusi lengkap aluminium & kaca</div>
               <h1 class="heroTitle">
-                Kusen Alumunium, Kaca, Pintu Engineering &amp; Las
+                Kusen Aluminium, Kaca, Pintu Engineering &amp; Las
                 <br />
                 <em>Rapi • Kuat • Awet</em>
               </h1>
@@ -402,7 +405,7 @@
         <div class="container">
           <h2 class="sectionTitle">Tentang Kami</h2>
           <p class="sectionLead">
-            Giri Jaya Alumindo adalah usaha berpengalaman di bidang pembuatan, pemasangan, dan perbaikan produk berbahan alumunium, kaca,
+            Giri Jaya Alumindo adalah usaha berpengalaman di bidang pembuatan, pemasangan, dan perbaikan produk berbahan aluminium, kaca,
             besi, dan stainless steel. Kami percaya bangunan yang baik tidak hanya kokoh, tetapi juga indah dan nyaman—karena itu detail
             pekerjaan selalu kami utamakan.
           </p>
@@ -442,7 +445,7 @@
           <div class="grid3">
             <article class="tile">
               <div class="icon">A</div>
-              <h3>Kusen Alumunium</h3>
+              <h3>Kusen Aluminium</h3>
               <p>Berbagai ukuran, ketebalan, dan warna (putih, hitam, cokelat, perak, dll). Anti karat, ringan, kuat, dan awet.</p>
               <ul>
                 <li>Model standar, minimalis, hingga custom</li>
@@ -452,7 +455,7 @@
 
             <article class="tile">
               <div class="icon">B</div>
-              <h3>Pintu &amp; Jendela Alumunium</h3>
+              <h3>Pintu &amp; Jendela Aluminium</h3>
               <p>Tahan panas &amp; air, tidak lapuk, mudah dirawat. Cocok untuk tampilan rumah modern.</p>
               <ul>
                 <li>Pintu ayun, geser, lipat</li>
@@ -489,7 +492,7 @@
               <h3>Pagar &amp; Teralis</h3>
               <p>Gabungan keamanan dan keindahan dengan banyak pilihan model.</p>
               <ul>
-                <li>Alumunium (ringan &amp; anti karat)</li>
+                <li>Aluminium (ringan &amp; anti karat)</li>
                 <li>Besi/baja (sangat kuat)</li>
                 <li>Model minimalis, klasik, atau motif khusus</li>
               </ul>
@@ -500,7 +503,7 @@
               <h3>Kanopi, Balkon, Railing &amp; Stainless</h3>
               <p>Solusi pelengkap bangunan agar lebih aman, rapi, dan tahan cuaca.</p>
               <ul>
-                <li>Kanopi alumunium / baja ringan</li>
+                <li>Kanopi aluminium / baja ringan</li>
                 <li>Atap polikarbonat atau kaca</li>
                 <li>Railing tangga, railing balkon, pembatas</li>
                 <li>Pengerjaan stainless (rak, talang, meja kerja, dll)</li>
@@ -520,7 +523,7 @@
 
           <div class="contactWrap">
             <div class="card contactCard">
-              <h3>Hubungi Saya Bapak Yatin Sekarang</h3>
+              <h3>Hubungi Kami Sekarang</h3>
               <ul class="contactList">
                 <li>
                   WhatsApp 1:
@@ -562,7 +565,7 @@
       <div class="container">
         <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center">
           <div>© <span id="year"></span> Giri Jaya Alumindo. Semua hak dilindungi.</div>
-          <div>Spesialis: Alumunium • Kaca • Pintu Engineering • Las</div>
+          <div>Spesialis: Aluminium • Kaca • Pintu Engineering • Las</div>
         </div>
       </div>
     </footer>
@@ -571,13 +574,12 @@
       document.getElementById("year").textContent = new Date().getFullYear();
     </script>
 
-    <!-- LocalBusiness structured data (opsional untuk SEO) -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
         "name": "Giri Jaya Alumindo",
-        "description": "Spesialis kusen alumunium, kaca & cermin, pintu engineering/besi, pagar & teralis, kanopi, balkon & railing, serta stainless steel.",
+        "description": "Spesialis kusen aluminium, kaca & cermin, pintu engineering/besi, pagar & teralis, kanopi, balkon & railing, serta stainless steel.",
         "telephone": ["+62 812-2534-5030", "+62 878-0546-1022"],
         "address": {
           "@type": "PostalAddress",
@@ -588,4 +590,3 @@
     </script>
   </body>
 </html>
-
