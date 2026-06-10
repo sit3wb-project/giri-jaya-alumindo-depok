@@ -24,7 +24,7 @@
       }
 
       *{ box-sizing: border-box; }
-      html,body{ height:100%; }
+      html,body{ height:100%; scroll-behavior: smooth; }
       body{
         margin:0;
         font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Liberation Sans", sans-serif;
@@ -83,9 +83,9 @@
         border-radius: 999px;
         color: var(--muted);
         font-size: 13px;
-        transition: .15s ease;
+        transition: .2s ease;
       }
-      .pill:hover{ border-color: rgba(245,197,66,.5); color: var(--text); }
+      .pill:hover{ border-color: rgba(245,197,66,.5); color: var(--text); transform: scale(1.05); }
 
       /* Hero */
       .hero{
@@ -102,6 +102,7 @@
         border: 1px solid rgba(255,255,255,.12);
         border-radius: var(--radius);
         box-shadow: var(--shadow);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
       }
       .heroMain{
         padding: 26px 26px 22px;
@@ -120,6 +121,7 @@
         font-weight: 600;
         letter-spacing: .2px;
         font-size: 13px;
+        animation: pulseTag 2s infinite ease-in-out;
       }
       .heroTitle{
         margin: 14px 0 8px;
@@ -158,15 +160,24 @@
         color: var(--text);
         font-weight: 700;
         font-size: 14px;
-        transition: .15s ease;
+        transition: .2s ease;
       }
-      .btn:hover{ transform: translateY(-1px); border-color: rgba(255,255,255,.24); }
+      .btn:hover{ transform: translateY(-3px); border-color: rgba(255,255,255,.24); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+      
+      /* --- ANIMASI TOMBOL UTAMA (MENARIK PEMBELI) --- */
       .btnPrimary{
-        background: linear-gradient(90deg, rgba(245,197,66,.95), rgba(245,197,66,.72));
+        background: linear-gradient(90deg, #f5c542, #e0b024);
         border-color: rgba(245,197,66,.6);
         color: #1a1200;
+        position: relative;
+        overflow: hidden;
+        animation: ctaPulse 2s infinite;
       }
-      .btnPrimary:hover{ border-color: rgba(245,197,66,.85); }
+      .btnPrimary:hover{ 
+        border-color: rgba(245,197,66,.85); 
+        box-shadow: 0 0 20px rgba(245, 197, 66, 0.6);
+      }
+      
       .metaRow{
         margin-top: 14px;
         display:flex;
@@ -192,20 +203,36 @@
         gap: 12px;
       }
       
-      /* --- BAGIAN PERBAIKAN FOTO --- */
+      /* --- ANIMASI EFEK KILAU PADA SPANDUK --- */
       .photo{
         border-radius: 14px;
         overflow:hidden;
         border: 1px solid rgba(255,255,255,.12);
         background: rgba(0,0,0,.2);
+        position: relative;
       }
       .photo img{
         width:100%;
-        height: auto;          /* Mengikuti tinggi asli gambar agar tidak terpotong */
-        object-fit: contain;   /* Memastikan gambar terlihat seutuhnya secara proporsional */
+        height: auto;
+        object-fit: contain;
         display:block;
+        transition: transform 0.5s ease;
       }
-      /* ----------------------------- */
+      /* Efek kilatan cahaya menyapu spanduk setiap 4 detik */
+      .photo::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -150%;
+        width: 50%;
+        height: 100%;
+        background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.25), transparent);
+        transform: skewX(-25deg);
+        animation: shineSweep 4s infinite ease-in-out;
+      }
+      .photo:hover img {
+        transform: scale(1.03); /* Sedikit membesar saat disorot agar interaktif */
+      }
 
       .asideBox{
         border-radius: 14px;
@@ -268,12 +295,21 @@
         gap: 14px;
       }
 
+      /* --- ANIMASI PADA KARTU DAFTAR LAYANAN --- */
       .tile{
         padding: 16px;
         border-radius: var(--radius-sm);
         border: 1px solid rgba(255,255,255,.12);
         background: rgba(255,255,255,.04);
+        transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s ease, border-color 0.3s ease;
       }
+      .tile:hover {
+        transform: translateY(-6px);
+        border-color: rgba(42,209,255,.4);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        background: rgba(255,255,255,.06);
+      }
+      
       .tile h3{ margin: 0 0 6px; font-size: 16px; }
       .tile p{ margin: 0 0 10px; color: var(--muted); font-size: 14px; }
       .tile ul{
@@ -296,6 +332,12 @@
         margin-bottom: 10px;
         font-weight: 900;
         letter-spacing:.4px;
+        transition: transform 0.3s ease;
+      }
+      .tile:hover .icon {
+        transform: rotate(10deg) scale(1.1);
+        background: rgba(42,209,255,.20);
+        color: #fff;
       }
 
       .contactWrap{
@@ -317,7 +359,7 @@
         color: var(--muted);
       }
       .contactList a{ color: var(--text); font-weight: 700; text-decoration:none; }
-      .contactList a:hover{ text-decoration: underline; }
+      .contactList a:hover{ text-decoration: underline; color: var(--brand); }
       .small{ font-size: 13px; color: var(--muted); }
 
       footer{
@@ -325,6 +367,30 @@
         border-top: 1px solid rgba(255,255,255,.08);
         color: rgba(232,238,252,.6);
         font-size: 13px;
+      }
+
+      /* --- TIMELINE KEYFRAMES (DAPUR ANIMASI) --- */
+      @keyframes ctaPulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(245, 197, 66, 0.5);
+        }
+        70% {
+          box-shadow: 0 0 0 12px rgba(245, 197, 66, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(245, 197, 66, 0);
+        }
+      }
+
+      @keyframes shineSweep {
+        0% { left: -150%; }
+        15% { left: 150%; }
+        100% { left: 150%; }
+      }
+
+      @keyframes pulseTag {
+        0%, 100% { transform: scale(1); opacity: 1; }
+        50% { transform: scale(1.03); opacity: 0.95; }
       }
 
       /* Responsive */
@@ -371,13 +437,13 @@
               </p>
 
               <div class="ctaRow" role="group" aria-label="Aksi cepat">
-                <a class="btn btnPrimary" href="https://wa.me/6281225345030" target="_blank" rel="noopener">WhatsApp 1</a>
+                <a class="btn btnPrimary" href="https://wa.me/6281225345030" target="_blank" rel="noopener">WhatsApp 1 (Fast Response)</a>
                 <a class="btn" href="https://wa.me/6287805461022" target="_blank" rel="noopener">WhatsApp 2</a>
                 <a class="btn" href="tel:+6281225345030">Telepon</a>
               </div>
 
               <div class="metaRow" aria-label="Informasi ringkas">
-                <div class="meta">Konsultasi desain: <strong style="margin-left:6px;color:var(--text)">GRATIS</strong></div>
+                <div class="meta">Konsultasi desain: <strong style="margin-left:6px;color:var(--brand)">GRATIS</strong></div>
                 <div class="meta">Garansi hasil kerja</div>
                 <div class="meta">Harga transparan &amp; terjangkau</div>
               </div>
