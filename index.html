@@ -1,514 +1,617 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Giri Jaya Alumindo - Solusi Aluminium & Kaca Premium</title>
+/* ============================================
+   GIRI JAYA ALUMINDO - CUSTOM STYLES
+   ============================================ */
+
+/* CSS Variables untuk warna tema */
+:root {
+    --navy: #1a365d;
+    --gold: #c9a227;
+    --teal: #4a9b9b;
+    --gray-50: #f8fafc;
+    --gray-100: #f1f5f9;
+}
+
+/* Utility Classes */
+.text-navy { color: var(--navy); }
+.text-gold { color: var(--gold); }
+.text-teal { color: var(--teal); }
+.bg-navy { background-color: var(--navy); }
+
+/* Font Families */
+.font-playfair { font-family: 'Playfair Display', serif; }
+.font-inter { font-family: 'Inter', sans-serif; }
+
+/* Glassmorphism Effect */
+.glass-card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Button Styles */
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--gold), #d4af37);
+    color: white;
+    padding: 0.875rem 2rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(201, 162, 39, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(201, 162, 39, 0.4);
+}
+
+.btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    color: var(--navy);
+    padding: 0.875rem 2rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    border: 2px solid var(--navy);
+    transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background: var(--navy);
+    color: white;
+}
+
+/* Navigation Scroll Effect */
+#navbar.scrolled {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+}
+
+/* Animation Classes */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+/* Service Card Hover Effect */
+.service-card {
+    transition: transform 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-8px);
+}
+
+/* Smooth Scroll */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--navy);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--gold);
+}
+
+/* Three.js Canvas Container */
+#hero3d {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+#hero3d canvas {
+    display: block;
+}
+
+/* Audio Button Animation */
+#audioToggle.playing {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(201, 162, 39, 0.4); }
+    50% { box-shadow: 0 0 0 10px rgba(201, 162, 39, 0); }
+}
+
+/* Mobile Menu Animation */
+#mobileMenu {
+    transition: transform 0.3s ease-in-out;
+}
+
+#mobileMenu.open {
+    transform: translateX(0);
+}
+
+/* Stats Counter Animation */
+.stat-item {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .font-playfair {
+        word-wrap: break-word;
+    }
     
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    #hero3d {
+        opacity: 0.5; /* Reduce 3D intensity on mobile */
+    }
+}
+
+/* Loading State */
+.loading {
+    position: relative;
+    overflow: hidden;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    100% { left: 100%; }
+}
+3. js/main.js
+javascript
+/**
+ * GIRI JAYA ALUMINDO - MAIN JAVASCRIPT
+ * Features: Three.js 3D Scene, GSAP Animations, Audio Control, WhatsApp Integration
+ */
+
+// ============================================
+// INITIALIZATION
+// ============================================
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Initialize Lucide Icons
+    lucide.createIcons();
     
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    // Initialize all modules
+    initThreeJS();
+    initGSAP();
+    initNavigation();
+    initAudio();
+    initMobileMenu();
+    initCounters();
+});
+
+// ============================================
+// THREE.JS 3D SCENE (Hero Section)
+// ============================================
+
+function initThreeJS() {
+    const container = document.getElementById('hero3d');
+    if (!container) return;
+
+    // Scene setup
+    const scene = new THREE.Scene();
     
-    <!-- Three.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    
-    <!-- GSAP untuk animasi -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-    
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body class="overflow-x-hidden">
+    // Camera setup
+    const camera = new THREE.PerspectiveCamera(
+        75, 
+        window.innerWidth / window.innerHeight, 
+        0.1, 
+        1000
+    );
+    camera.position.z = 5;
 
-    <!-- Audio Background (Indian Flute) -->
-    <audio id="bgMusic" loop>
-        <source src="assets/audio/indian-flute.mp3" type="audio/mpeg">
-        <!-- Fallback: gunakan URL audio flute India -->
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-    </audio>
+    // Renderer setup
+    const renderer = new THREE.WebGLRenderer({ 
+        alpha: true, 
+        antialias: true 
+    });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    container.appendChild(renderer.domElement);
 
-    <!-- Audio Control Button -->
-    <button id="audioToggle" class="fixed top-6 right-6 z-50 glass-card p-3 rounded-full hover:scale-110 transition-transform">
-        <i data-lucide="volume-2" class="w-5 h-5 text-navy"></i>
-    </button>
+    // Lighting
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+    scene.add(ambientLight);
 
-    <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/6281225345030?text=Halo%20Giri%20Jaya%20Alumindo,%20saya%20tertarik%20untuk%20konsultasi.%20Bisa%20dibantu?" 
-       target="_blank"
-       class="fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-green-500 text-white px-4 py-3 rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all group">
-        <i data-lucide="message-circle" class="w-6 h-6"></i>
-        <span class="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-300 whitespace-nowrap font-medium">
-            Chat WhatsApp
-        </span>
-        <span class="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full animate-pulse"></span>
-    </a>
+    const directionalLight = new THREE.DirectionalLight(0xc9a227, 0.8);
+    directionalLight.position.set(5, 5, 5);
+    scene.add(directionalLight);
 
-    <!-- Navigation -->
-    <nav id="navbar" class="fixed w-full z-40 transition-all duration-300 py-4">
-        <div class="container mx-auto px-6 flex justify-between items-center">
-            <!-- Logo -->
-            <div class="flex items-center gap-3">
-                <div class="w-12 h-12 bg-gradient-to-br from-gold to-yellow-600 rounded-lg flex items-center justify-center shadow-lg">
-                    <span class="text-white font-bold text-xl">G</span>
-                </div>
-                <div>
-                    <h1 class="font-playfair text-xl font-bold text-navy">GIRI JAYA</h1>
-                    <p class="text-xs text-gray-600 tracking-widest">ALUMINDO</p>
-                </div>
-            </div>
+    const pointLight = new THREE.PointLight(0x4a9b9b, 0.5);
+    pointLight.position.set(-5, 3, 2);
+    scene.add(pointLight);
 
-            <!-- Menu Desktop -->
-            <div class="hidden md:flex items-center gap-8">
-                <a href="#home" class="text-gray-700 hover:text-navy font-medium transition-colors">Beranda</a>
-                <a href="#layanan" class="text-gray-700 hover:text-navy font-medium transition-colors">Layanan</a>
-                <a href="#portfolio" class="text-gray-700 hover:text-navy font-medium transition-colors">Portfolio</a>
-                <a href="#kontak" class="btn-primary">Hubungi Kami</a>
-            </div>
+    // Create 3D Objects - Aluminum Frame Structure
+    const group = new THREE.Group();
 
-            <!-- Mobile Menu Button -->
-            <button id="mobileMenuBtn" class="md:hidden text-navy">
-                <i data-lucide="menu" class="w-6 h-6"></i>
-            </button>
-        </div>
-    </nav>
+    // Main frame (representing aluminum window frame)
+    const frameGeometry = new THREE.BoxGeometry(3, 4, 0.1);
+    const frameMaterial = new THREE.MeshStandardMaterial({
+        color: 0xc0c0c0,
+        metalness: 0.9,
+        roughness: 0.2,
+    });
+    const frame = new THREE.Mesh(frameGeometry, frameMaterial);
+    group.add(frame);
 
-    <!-- Mobile Menu -->
-    <div id="mobileMenu" class="fixed inset-0 bg-white z-50 transform translate-x-full transition-transform duration-300 md:hidden">
-        <div class="p-6">
-            <button id="closeMobileMenu" class="absolute top-6 right-6">
-                <i data-lucide="x" class="w-6 h-6"></i>
-            </button>
-            <div class="flex flex-col gap-6 mt-16">
-                <a href="#home" class="text-2xl font-playfair text-navy">Beranda</a>
-                <a href="#layanan" class="text-2xl font-playfair text-navy">Layanan</a>
-                <a href="#portfolio" class="text-2xl font-playfair text-navy">Portfolio</a>
-                <a href="#kontak" class="btn-primary text-center mt-4">Hubungi Kami</a>
-            </div>
-        </div>
-    </div>
+    // Inner glass panel
+    const glassGeometry = new THREE.BoxGeometry(2.6, 3.6, 0.05);
+    const glassMaterial = new THREE.MeshPhysicalMaterial({
+        color: 0x88ccff,
+        metalness: 0,
+        roughness: 0,
+        transmission: 0.9,
+        transparent: true,
+        opacity: 0.3,
+    });
+    const glass = new THREE.Mesh(glassGeometry, glassMaterial);
+    glass.position.z = 0.02;
+    group.add(glass);
 
-    <!-- HERO SECTION dengan 3D -->
-    <section id="home" class="relative min-h-screen flex items-center overflow-hidden">
-        <!-- Three.js Canvas Container -->
-        <div id="hero3d" class="absolute inset-0 z-0"></div>
+    // Cross bars (representing frame divisions)
+    const barGeometry1 = new THREE.BoxGeometry(0.05, 3.6, 0.12);
+    const barMaterial = new THREE.MeshStandardMaterial({
+        color: 0x1a365d,
+        metalness: 0.8,
+        roughness: 0.3,
+    });
+    const bar1 = new THREE.Mesh(barGeometry1, barMaterial);
+    group.add(bar1);
+
+    const barGeometry2 = new THREE.BoxGeometry(2.6, 0.05, 0.12);
+    const bar2 = new THREE.Mesh(barGeometry2, barMaterial);
+    group.add(bar2);
+
+    // Floating particles
+    const particlesGeometry = new THREE.BufferGeometry();
+    const particlesCount = 50;
+    const posArray = new Float32Array(particlesCount * 3);
+
+    for (let i = 0; i < particlesCount * 3; i++) {
+        posArray[i] = (Math.random() - 0.5) * 10;
+    }
+
+    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+    const particlesMaterial = new THREE.PointsMaterial({
+        size: 0.02,
+        color: 0xc9a227,
+        transparent: true,
+        opacity: 0.6,
+    });
+    const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+    scene.add(particlesMesh);
+
+    // Add group to scene
+    group.position.x = 2;
+    scene.add(group);
+
+    // Mouse interaction
+    let mouseX = 0;
+    let mouseY = 0;
+    let targetX = 0;
+    let targetY = 0;
+
+    const windowHalfX = window.innerWidth / 2;
+    const windowHalfY = window.innerHeight / 2;
+
+    document.addEventListener('mousemove', (event) => {
+        mouseX = (event.clientX - windowHalfX) / 100;
+        mouseY = (event.clientY - windowHalfY) / 100;
+    });
+
+    // Animation loop
+    let animationId;
+    const clock = new THREE.Clock();
+
+    function animate() {
+        animationId = requestAnimationFrame(animate);
+
+        const elapsedTime = clock.getElapsedTime();
+
+        // Smooth rotation based on mouse
+        targetX = mouseX * 0.5;
+        targetY = mouseY * 0.5;
         
-        <!-- Gradient Overlay -->
-        <div class="absolute inset-0 bg-gradient-to-r from-white/90 via-white/70 to-transparent z-10"></div>
+        group.rotation.y += 0.05 * (targetX - group.rotation.y);
+        group.rotation.x += 0.05 * (targetY - group.rotation.x);
 
-        <!-- Content -->
-        <div class="container mx-auto px-6 relative z-20">
-            <div class="max-w-2xl">
-                <!-- Badge -->
-                <div class="inline-flex items-center gap-2 bg-gold/10 border border-gold/30 rounded-full px-4 py-2 mb-6 fade-in">
-                    <span class="w-2 h-2 bg-gold rounded-full animate-pulse"></span>
-                    <span class="text-sm font-medium text-navy">25+ Tahun Pengalaman</span>
-                </div>
+        // Continuous slow rotation
+        group.rotation.y += 0.002;
 
-                <!-- Headline -->
-                <h1 class="font-playfair text-5xl md:text-6xl lg:text-7xl font-bold text-navy leading-tight mb-6 fade-in">
-                    Solusi <span class="text-gold">Aluminium</span> & Kaca Premium
-                </h1>
+        // Float animation
+        group.position.y = Math.sin(elapsedTime * 0.5) * 0.1;
 
-                <!-- Subheadline -->
-                <p class="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed fade-in">
-                    Dari kusen hingga kanopi kaca, kami hadir dengan material terbaik dan pengerjaan presisi untuk kepuasan maksimal hunian dan bisnis Anda.
-                </p>
+        // Particles rotation
+        particlesMesh.rotation.y = elapsedTime * 0.05;
+        particlesMesh.rotation.x = elapsedTime * 0.02;
 
-                <!-- CTA Buttons -->
-                <div class="flex flex-col sm:flex-row gap-4 fade-in">
-                    <a href="https://wa.me/6281225345030?text=Halo%20Giri%20Jaya%20Alumindo,%20saya%20tertarik%20untuk%20konsultasi.%20Bisa%20dibantu?" 
-                       target="_blank"
-                       class="btn-primary flex items-center justify-center gap-2 text-lg">
-                        <i data-lucide="message-circle" class="w-5 h-5"></i>
-                        Konsultasi Gratis
-                    </a>
-                    <a href="#layanan" class="btn-secondary flex items-center justify-center gap-2">
-                        <span>Lihat Layanan</span>
-                        <i data-lucide="arrow-down" class="w-4 h-4"></i>
-                    </a>
-                </div>
+        renderer.render(scene, camera);
+    }
 
-                <!-- Trust Badges -->
-                <div class="flex flex-wrap gap-6 mt-12 pt-8 border-t border-gray-200 fade-in">
-                    <div class="flex items-center gap-2">
-                        <i data-lucide="shield-check" class="w-5 h-5 text-teal"></i>
-                        <span class="text-sm font-medium text-gray-600">Bergaransi</span>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <i data-lucide="award" class="w-5 h-5 text-teal"></i>
-                        <span class="text-sm font-medium text-gray-600">500+ Proyek</span>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <i data-lucide="clock" class="w-5 h-5 text-teal"></i>
-                        <span class="text-sm font-medium text-gray-600">Respon Cepat</span>
-                    </div>
-                </div>
-            </div>
-        </div>
+    animate();
 
-        <!-- Scroll Indicator -->
-        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 animate-bounce">
-            <i data-lucide="chevron-down" class="w-6 h-6 text-navy/50"></i>
-        </div>
-    </section>
+    // Handle resize
+    window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    });
 
-    <!-- STATS SECTION -->
-    <section class="py-16 bg-navy text-white">
-        <div class="container mx-auto px-6">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-                <div class="stat-item">
-                    <div class="text-4xl md:text-5xl font-playfair font-bold text-gold mb-2" data-count="25">0</div>
-                    <p class="text-gray-300">Tahun Pengalaman</p>
-                </div>
-                <div class="stat-item">
-                    <div class="text-4xl md:text-5xl font-playfair font-bold text-gold mb-2" data-count="500">0</div>
-                    <p class="text-gray-300">Proyek Selesai</p>
-                </div>
-                <div class="stat-item">
-                    <div class="text-4xl md:text-5xl font-playfair font-bold text-gold mb-2" data-count="50">0</div>
-                    <p class="text-gray-300">Mitra Bisnis</p>
-                </div>
-                <div class="stat-item">
-                    <div class="text-4xl md:text-5xl font-playfair font-bold text-gold mb-2" data-count="98">0</div>
-                    <p class="text-gray-300">% Kepuasan</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    // Cleanup on page unload
+    window.addEventListener('beforeunload', () => {
+        cancelAnimationFrame(animationId);
+        renderer.dispose();
+    });
+}
 
-    <!-- LAYANAN SECTION -->
-    <section id="layanan" class="py-24 bg-gray-50">
-        <div class="container mx-auto px-6">
-            <!-- Section Header -->
-            <div class="text-center max-w-2xl mx-auto mb-16">
-                <span class="text-teal font-medium tracking-widest uppercase text-sm">Layanan Kami</span>
-                <h2 class="font-playfair text-4xl md:text-5xl font-bold text-navy mt-3 mb-4">
-                    Solusi Lengkap Aluminium & Kaca
-                </h2>
-                <p class="text-gray-600">
-                    Berbagai layanan profesional untuk memenuhi kebutuhan konstruksi dan desain interior Anda.
-                </p>
-            </div>
+// ============================================
+// GSAP ANIMATIONS
+// ============================================
 
-            <!-- Services Grid -->
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Service Card 1 -->
-                <div class="service-card group">
-                    <div class="relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-300">
-                        <div class="h-48 bg-gradient-to-br from-navy to-blue-900 flex items-center justify-center">
-                            <i data-lucide="layout" class="w-16 h-16 text-gold group-hover:scale-110 transition-transform duration-300"></i>
-                        </div>
-                        <div class="p-6">
-                            <h3 class="font-playfair text-xl font-bold text-navy mb-2">Kusen Aluminium</h3>
-                            <p class="text-gray-600 text-sm mb-4">Kusen aluminium berkualitas tinggi dengan berbagai warna dan finishing.</p>
-                            <a href="https://wa.me/6281225345030?text=Halo,%20saya%20ingin%20menanyakan%20tentang%20Kusen%20Aluminium" 
-                               target="_blank"
-                               class="text-teal font-medium flex items-center gap-1 hover:gap-2 transition-all">
-                                Pesan Sekarang <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+function initGSAP() {
+    gsap.registerPlugin(ScrollTrigger);
 
-                <!-- Service Card 2 -->
-                <div class="service-card group">
-                    <div class="relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-300">
-                        <div class="h-48 bg-gradient-to-br from-navy to-blue-900 flex items-center justify-center">
-                            <i data-lucide="door-open" class="w-16 h-16 text-gold group-hover:scale-110 transition-transform duration-300"></i>
-                        </div>
-                        <div class="p-6">
-                            <h3 class="font-playfair text-xl font-bold text-navy mb-2">Pintu Engineering</h3>
-                            <p class="text-gray-600 text-sm mb-4">Pintu dengan desain modern dan mekanisme presisi untuk keamanan optimal.</p>
-                            <a href="https://wa.me/6281225345030?text=Halo,%20saya%20ingin%20menanyakan%20tentang%20Pintu%20Engineering" 
-                               target="_blank"
-                               class="text-teal font-medium flex items-center gap-1 hover:gap-2 transition-all">
-                                Pesan Sekarang <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+    // Fade in animations for hero content
+    gsap.utils.toArray('.fade-in').forEach((element, i) => {
+        gsap.to(element, {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            delay: i * 0.2,
+            ease: 'power2.out'
+        });
+    });
 
-                <!-- Service Card 3 -->
-                <div class="service-card group">
-                    <div class="relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-300">
-                        <div class="h-48 bg-gradient-to-br from-navy to-blue-900 flex items-center justify-center">
-                            <i data-lucide="square" class="w-16 h-16 text-gold group-hover:scale-110 transition-transform duration-300"></i>
-                        </div>
-                        <div class="p-6">
-                            <h3 class="font-playfair text-xl font-bold text-navy mb-2">Kaca Tempered</h3>
-                            <p class="text-gray-600 text-sm mb-4">Kaca tempered berkualitas untuk keamanan dan estetika maksimal.</p>
-                            <a href="https://wa.me/6281225345030?text=Halo,%20saya%20ingin%20menanyakan%20tentang%20Kaca%20Tempered" 
-                               target="_blank"
-                               class="text-teal font-medium flex items-center gap-1 hover:gap-2 transition-all">
-                                Pesan Sekarang <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+    // Service cards stagger animation
+    gsap.from('.service-card', {
+        scrollTrigger: {
+            trigger: '#layanan',
+            start: 'top 80%',
+        },
+        opacity: 0,
+        y: 50,
+        duration: 0.6,
+        stagger: 0.15,
+        ease: 'power2.out'
+    });
 
-                <!-- Service Card 4 -->
-                <div class="service-card group">
-                    <div class="relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-300">
-                        <div class="h-48 bg-gradient-to-br from-navy to-blue-900 flex items-center justify-center">
-                            <i data-lucide="home" class="w-16 h-16 text-gold group-hover:scale-110 transition-transform duration-300"></i>
-                        </div>
-                        <div class="p-6">
-                            <h3 class="font-playfair text-xl font-bold text-navy mb-2">Kanopi Kaca</h3>
-                            <p class="text-gray-600 text-sm mb-4">Kanopi kaca elegan untuk pelindung ruang outdoor Anda.</p>
-                            <a href="https://wa.me/6281225345030?text=Halo,%20saya%20ingin%20menanyakan%20tentang%20Kanopi%20Kaca" 
-                               target="_blank"
-                               class="text-teal font-medium flex items-center gap-1 hover:gap-2 transition-all">
-                                Pesan Sekarang <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+    // Stats section animation
+    gsap.from('.stat-item', {
+        scrollTrigger: {
+            trigger: '.stat-item',
+            start: 'top 85%',
+        },
+        opacity: 0,
+        y: 30,
+        duration: 0.6,
+        stagger: 0.1,
+        ease: 'power2.out'
+    });
 
-                <!-- Service Card 5 -->
-                <div class="service-card group">
-                    <div class="relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-300">
-                        <div class="h-48 bg-gradient-to-br from-navy to-blue-900 flex items-center justify-center">
-                            <i data-lucide="stairs" class="w-16 h-16 text-gold group-hover:scale-110 transition-transform duration-300"></i>
-                        </div>
-                        <div class="p-6">
-                            <h3 class="font-playfair text-xl font-bold text-navy mb-2">Rolling Tangga</h3>
-                            <p class="text-gray-600 text-sm mb-4">Tangga rolling dengan desain modern dan material tahan lama.</p>
-                            <a href="https://wa.me/6281225345030?text=Halo,%20saya%20ingin%20menanyakan%20tentang%20Rolling%20Tangga" 
-                               target="_blank"
-                               class="text-teal font-medium flex items-center gap-1 hover:gap-2 transition-all">
-                                Pesan Sekarang <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+    // Parallax effect for CTA section
+    gsap.to('#kontak', {
+        scrollTrigger: {
+            trigger: '#kontak',
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 1
+        },
+        backgroundPosition: '50% 100%'
+    });
+}
 
-                <!-- Service Card 6 -->
-                <div class="service-card group">
-                    <div class="relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-300">
-                        <div class="h-48 bg-gradient-to-br from-navy to-blue-900 flex items-center justify-center">
-                            <i data-lucide="sun" class="w-16 h-16 text-gold group-hover:scale-110 transition-transform duration-300"></i>
-                        </div>
-                        <div class="p-6">
-                            <h3 class="font-playfair text-xl font-bold text-navy mb-2">Awnings & Stainless</h3>
-                            <p class="text-gray-600 text-sm mb-4">Awnings dan produk stainless steel custom sesuai kebutuhan.</p>
-                            <a href="https://wa.me/6281225345030?text=Halo,%20saya%20ingin%20menanyakan%20tentang%20Awnings%20dan%20Stainless" 
-                               target="_blank"
-                               class="text-teal font-medium flex items-center gap-1 hover:gap-2 transition-all">
-                                Pesan Sekarang <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+// ============================================
+// NAVIGATION SCROLL EFFECT
+// ============================================
 
-    <!-- WHY CHOOSE US -->
-    <section class="py-24 bg-white">
-        <div class="container mx-auto px-6">
-            <div class="grid lg:grid-cols-2 gap-16 items-center">
-                <!-- Left Content -->
-                <div>
-                    <span class="text-teal font-medium tracking-widest uppercase text-sm">Mengapa Memilih Kami</span>
-                    <h2 class="font-playfair text-4xl md:text-5xl font-bold text-navy mt-3 mb-6">
-                        Kualitas yang Diakui, Pelayanan yang Terpercaya
-                    </h2>
-                    <p class="text-gray-600 mb-8 leading-relaxed">
-                        Dengan pengalaman lebih dari 25 tahun, Giri Jaya Alumindo telah menjadi pilihan utama ribuan pelanggan untuk solusi aluminium dan kaca berkualitas premium.
-                    </p>
+function initNavigation() {
+    const navbar = document.getElementById('navbar');
+    
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
 
-                    <!-- Features -->
-                    <div class="space-y-6">
-                        <div class="flex gap-4">
-                            <div class="w-12 h-12 bg-gold/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                                <i data-lucide="check-circle" class="w-6 h-6 text-gold"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-navy mb-1">Material Premium</h4>
-                                <p class="text-gray-600 text-sm">Hanya menggunakan material berkualitas tinggi dari supplier terpercaya.</p>
-                            </div>
-                        </div>
-                        <div class="flex gap-4">
-                            <div class="w-12 h-12 bg-gold/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                                <i data-lucide="ruler" class="w-6 h-6 text-gold"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-navy mb-1">Pengerjaan Presisi</h4>
-                                <p class="text-gray-600 text-sm">Tim ahli dengan pengalaman memastikan setiap detail sempurna.</p>
-                            </div>
-                        </div>
-                        <div class="flex gap-4">
-                            <div class="w-12 h-12 bg-gold/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                                <i data-lucide="tag" class="w-6 h-6 text-gold"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-navy mb-1">Harga Kompetitif</h4>
-                                <p class="text-gray-600 text-sm">Penawaran terbaik dengan transparansi harga tanpa biaya tersembunyi.</p>
-                            </div>
-                        </div>
-                        <div class="flex gap-4">
-                            <div class="w-12 h-12 bg-gold/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                                <i data-lucide="shield" class="w-6 h-6 text-gold"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-navy mb-1">Garansi 2 Tahun</h4>
-                                <p class="text-gray-600 text-sm">Jaminan kepuasan dengan garansi pemasangan dan produk.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+}
 
-                <!-- Right Image -->
-                <div class="relative">
-                    <div class="absolute -inset-4 bg-gradient-to-r from-gold/20 to-teal/20 rounded-3xl blur-2xl"></div>
-                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800" 
-                         alt="Aluminium Work" 
-                         class="relative rounded-2xl shadow-2xl w-full object-cover h-[500px]">
-                    
-                    <!-- Floating Card -->
-                    <div class="absolute -bottom-6 -left-6 bg-white p-6 rounded-xl shadow-xl">
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-                                <i data-lucide="phone" class="w-6 h-6 text-green-600"></i>
-                            </div>
-                            <div>
-                                <p class="text-sm text-gray-500">Hubungi Kami</p>
-                                <p class="font-bold text-navy">0812-2534-5030</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+// ============================================
+// AUDIO CONTROL (Indian Flute)
+// ============================================
 
-    <!-- CTA SECTION -->
-    <section id="kontak" class="py-24 relative overflow-hidden">
-        <!-- Background -->
-        <div class="absolute inset-0 bg-gradient-to-br from-navy via-blue-900 to-navy"></div>
-        <div class="absolute inset-0 opacity-10" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'0.4\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+function initAudio() {
+    const audio = document.getElementById('bgMusic');
+    const audioToggle = document.getElementById('audioToggle');
+    
+    if (!audio || !audioToggle) return;
 
-        <div class="container mx-auto px-6 relative z-10">
-            <div class="max-w-3xl mx-auto text-center">
-                <h2 class="font-playfair text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-                    Siap Mewujudkan Proyek Anda?
-                </h2>
-                <p class="text-xl text-gray-300 mb-10 leading-relaxed">
-                    Tim ahli kami siap membantu dari konsultasi hingga instalasi. 
-                    Hubungi sekarang dan dapatkan penawaran terbaik!
-                </p>
+    let isPlaying = false;
+    let hasInteracted = false;
 
-                <!-- CTA Buttons -->
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="https://wa.me/6281225345030?text=Halo%20Giri%20Jaya%20Alumindo,%20saya%20tertarik%20untuk%20konsultasi%20tentang%20proyek%20saya.%20Bisa%20dibantu?" 
-                       target="_blank"
-                       class="inline-flex items-center justify-center gap-3 bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-full text-lg font-medium transition-all hover:scale-105 shadow-lg">
-                        <i data-lucide="message-circle" class="w-6 h-6"></i>
-                        Chat WhatsApp - Respon Cepat 5 Menit
-                    </a>
-                    <a href="tel:087805461022" 
-                       class="inline-flex items-center justify-center gap-3 bg-white/10 hover:bg-white/20 text-white border border-white/30 px-8 py-4 rounded-full text-lg font-medium transition-all">
-                        <i data-lucide="phone" class="w-6 h-6"></i>
-                        Telepon Langsung
-                    </a>
-                </div>
+    // Set volume low (15%)
+    audio.volume = 0.15;
 
-                <!-- Contact Info -->
-                <div class="mt-12 grid sm:grid-cols-3 gap-6 text-left">
-                    <div class="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10">
-                        <i data-lucide="map-pin" class="w-8 h-8 text-gold mb-3"></i>
-                        <h4 class="font-bold text-white mb-2">Alamat</h4>
-                        <p class="text-gray-300 text-sm">Jl. Pemuda RT 05/06 No. 76 Sawangan Baru</p>
-                    </div>
-                    <div class="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10">
-                        <i data-lucide="phone" class="w-8 h-8 text-gold mb-3"></i>
-                        <h4 class="font-bold text-white mb-2">Telepon</h4>
-                        <p class="text-gray-300 text-sm">0812-2534-5030<br>0878-0546-1022</p>
-                    </div>
-                    <div class="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10">
-                        <i data-lucide="clock" class="w-8 h-8 text-gold mb-3"></i>
-                        <h4 class="font-bold text-white mb-2">Jam Operasional</h4>
-                        <p class="text-gray-300 text-sm">Senin - Sabtu<br>08:00 - 17:00 WIB</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    // Try autoplay after first user interaction (browser policy)
+    const enableAudio = () => {
+        if (!hasInteracted) {
+            hasInteracted = true;
+            audio.play().then(() => {
+                isPlaying = true;
+                audioToggle.classList.add('playing');
+                updateAudioIcon();
+            }).catch(err => {
+                console.log('Audio autoplay prevented:', err);
+            });
+        }
+    };
 
-    <!-- FOOTER -->
-    <footer class="bg-navy text-white py-12 border-t border-white/10">
-        <div class="container mx-auto px-6">
-            <div class="grid md:grid-cols-4 gap-8 mb-8">
-                <!-- Brand -->
-                <div class="md:col-span-2">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="w-10 h-10 bg-gradient-to-br from-gold to-yellow-600 rounded-lg flex items-center justify-center">
-                            <span class="text-white font-bold text-lg">G</span>
-                        </div>
-                        <div>
-                            <h3 class="font-playfair text-lg font-bold">GIRI JAYA ALUMINDO</h3>
-                        </div>
-                    </div>
-                    <p class="text-gray-400 max-w-sm mb-4">
-                        Solusi aluminium dan kaca premium untuk hunian dan bisnis Anda. Kualitas terjamin, harga kompetitif, pelayanan profesional.
-                    </p>
-                </div>
+    // Listen for first interaction
+    document.addEventListener('click', enableAudio, { once: true });
+    document.addEventListener('scroll', enableAudio, { once: true });
 
-                <!-- Quick Links -->
-                <div>
-                    <h4 class="font-bold mb-4">Layanan</h4>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="#" class="hover:text-gold transition-colors">Kusen Aluminium</a></li>
-                        <li><a href="#" class="hover:text-gold transition-colors">Pintu Engineering</a></li>
-                        <li><a href="#" class="hover:text-gold transition-colors">Kaca Tempered</a></li>
-                        <li><a href="#" class="hover:text-gold transition-colors">Kanopi Kaca</a></li>
-                    </ul>
-                </div>
+    // Toggle button
+    audioToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        
+        if (isPlaying) {
+            audio.pause();
+            isPlaying = false;
+            audioToggle.classList.remove('playing');
+        } else {
+            audio.play();
+            isPlaying = true;
+            audioToggle.classList.add('playing');
+        }
+        updateAudioIcon();
+    });
 
-                <!-- Contact -->
-                <div>
-                    <h4 class="font-bold mb-4">Kontak</h4>
-                    <ul class="space-y-2 text-gray-400">
-                        <li class="flex items-center gap-2">
-                            <i data-lucide="phone" class="w-4 h-4"></i>
-                            0812-2534-5030
-                        </li>
-                        <li class="flex items-center gap-2">
-                            <i data-lucide="map-pin" class="w-4 h-4"></i>
-                            Sawangan Baru
-                        </li>
-                    </ul>
-                </div>
-            </div>
+    function updateAudioIcon() {
+        const icon = audioToggle.querySelector('i');
+        if (isPlaying) {
+            icon.setAttribute('data-lucide', 'volume-2');
+        } else {
+            icon.setAttribute('data-lucide', 'volume-x');
+        }
+        lucide.createIcons();
+    }
+}
 
-            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-                <p class="text-gray-400 text-sm">
-                    © 2024 Giri Jaya Alumindo. All rights reserved.
-                </p>
-                <div class="flex gap-4">
-                    <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-gold transition-colors">
-                        <i data-lucide="facebook" class="w-5 h-5"></i>
-                    </a>
-                    <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-gold transition-colors">
-                        <i data-lucide="instagram" class="w-5 h-5"></i>
-                    </a>
-                    <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-gold transition-colors">
-                        <i data-lucide="youtube" class="w-5 h-5"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </footer>
+// ============================================
+// MOBILE MENU
+// ============================================
 
-    <!-- JavaScript -->
-    <script src="js/main.js"></script>
-</body>
-</html>
+function initMobileMenu() {
+    const menuBtn = document.getElementById('mobileMenuBtn');
+    const closeBtn = document.getElementById('closeMobileMenu');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    if (!menuBtn || !mobileMenu) return;
+
+    menuBtn.addEventListener('click', () => {
+        mobileMenu.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    });
+
+    closeBtn.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        document.body.style.overflow = '';
+    });
+
+    // Close menu when clicking links
+    mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu.classList.remove('open');
+            document.body.style.overflow = '';
+        });
+    });
+}
+
+// ============================================
+// STATS COUNTER ANIMATION
+// ============================================
+
+function initCounters() {
+    const counters = document.querySelectorAll('[data-count]');
+    
+    const animateCounter = (counter) => {
+        const target = parseInt(counter.getAttribute('data-count'));
+        const duration = 2000; // 2 seconds
+        const increment = target / (duration / 16); // 60fps
+        let current = 0;
+
+        const updateCounter = () => {
+            current += increment;
+            if (current < target) {
+                counter.textContent = Math.floor(current);
+                requestAnimationFrame(updateCounter);
+            } else {
+                counter.textContent = target;
+            }
+        };
+
+        updateCounter();
+    };
+
+    // Use Intersection Observer to trigger counter when visible
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateCounter(entry.target);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    counters.forEach(counter => observer.observe(counter));
+}
+
+// ============================================
+// UTILITY FUNCTIONS
+// ============================================
+
+// Debounce function for performance
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// Throttle function for scroll events
+function throttle(func, limit) {
+    let inThrottle;
+    return function(...args) {
+        if (!inThrottle) {
+            func.apply(this, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
+        }
+    };
+}
