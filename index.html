@@ -1,592 +1,514 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Giri Jaya Alumindo | Kusen Aluminium, Kaca, Pintu Engineering & Las</title>
-    <meta
-      name="description"
-      content="Giri Jaya Alumindo melayani pembuatan, pemasangan, dan perbaikan kusen aluminium, kaca & cermin, pintu engineering/besi, pagar & teralis, kanopi, balkon & railing, hingga stainless steel. Pengerjaan rapi, presisi, bergaransi."
-    />
-    <style>
-      :root{
-        --bg: #0b1220;
-        --surface: rgba(255,255,255,.06);
-        --surface-2: rgba(255,255,255,.09);
-        --text: #e8eefc;
-        --muted: rgba(232,238,252,.75);
-        --brand: #f5c542;       /* kuning industrial */
-        --brand-2: #2ad1ff;     /* aksen teknis */
-        --stroke: rgba(255,255,255,.14);
-        --shadow: 0 16px 40px rgba(0,0,0,.35);
-        --radius: 18px;
-        --radius-sm: 14px;
-      }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giri Jaya Alumindo - Solusi Aluminium & Kaca Premium</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <!-- GSAP untuk animasi -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="overflow-x-hidden">
 
-      *{ box-sizing: border-box; }
-      html,body{ height:100%; }
-      body{
-        margin:0;
-        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Liberation Sans", sans-serif;
-        color: var(--text);
-        background:
-          radial-gradient(1100px 600px at 20% 0%, rgba(42,209,255,.14), transparent 60%),
-          radial-gradient(900px 520px at 80% 20%, rgba(245,197,66,.12), transparent 55%),
-          linear-gradient(180deg, #070b14 0%, var(--bg) 45%, #070b14 100%);
-        line-height: 1.55;
-      }
+    <!-- Audio Background (Indian Flute) -->
+    <audio id="bgMusic" loop>
+        <source src="assets/audio/indian-flute.mp3" type="audio/mpeg">
+        <!-- Fallback: gunakan URL audio flute India -->
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
 
-      a{ color: inherit; }
-      .container{ width:min(1120px, calc(100% - 40px)); margin: 0 auto; }
+    <!-- Audio Control Button -->
+    <button id="audioToggle" class="fixed top-6 right-6 z-50 glass-card p-3 rounded-full hover:scale-110 transition-transform">
+        <i data-lucide="volume-2" class="w-5 h-5 text-navy"></i>
+    </button>
 
-      /* Header */
-      header{
-        position: sticky;
-        top:0;
-        z-index: 10;
-        backdrop-filter: blur(14px);
-        background: rgba(7,11,20,.55);
-        border-bottom: 1px solid rgba(255,255,255,.08);
-      }
-      .nav{
-        display:flex;
-        align-items:center;
-        justify-content:space-between;
-        padding: 14px 0;
-        gap: 14px;
-      }
-      .brand{
-        display:flex;
-        flex-direction:column;
-        gap:2px;
-      }
-      .brand strong{
-        letter-spacing: .8px;
-        font-size: 14px;
-        text-transform: uppercase;
-      }
-      .brand span{
-        font-size: 12px;
-        color: var(--muted);
-      }
-      .navlinks{
-        display:flex;
-        flex-wrap:wrap;
-        gap: 10px 12px;
-        align-items:center;
-        justify-content:flex-end;
-      }
-      .pill{
-        text-decoration:none;
-        padding: 8px 12px;
-        border: 1px solid rgba(255,255,255,.12);
-        border-radius: 999px;
-        color: var(--muted);
-        font-size: 13px;
-        transition: .15s ease;
-      }
-      .pill:hover{ border-color: rgba(245,197,66,.5); color: var(--text); }
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/6281225345030?text=Halo%20Giri%20Jaya%20Alumindo,%20saya%20tertarik%20untuk%20konsultasi.%20Bisa%20dibantu?" 
+       target="_blank"
+       class="fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-green-500 text-white px-4 py-3 rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all group">
+        <i data-lucide="message-circle" class="w-6 h-6"></i>
+        <span class="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-300 whitespace-nowrap font-medium">
+            Chat WhatsApp
+        </span>
+        <span class="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full animate-pulse"></span>
+    </a>
 
-      /* Hero */
-      .hero{
-        padding: 44px 0 26px;
-      }
-      .heroGrid{
-        display:grid;
-        grid-template-columns: 1.2fr .8fr;
-        gap: 22px;
-        align-items: stretch;
-      }
-      .card{
-        background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
-        border: 1px solid rgba(255,255,255,.12);
-        border-radius: var(--radius);
-        box-shadow: var(--shadow);
-      }
-      .heroMain{
-        padding: 26px 26px 22px;
-        position:relative;
-        overflow:hidden;
-      }
-      .tag{
-        display:inline-flex;
-        align-items:center;
-        gap: 10px;
-        padding: 7px 12px;
-        border-radius: 999px;
-        background: rgba(245,197,66,.14);
-        border: 1px solid rgba(245,197,66,.28);
-        color: #ffe9a7;
-        font-weight: 600;
-        letter-spacing: .2px;
-        font-size: 13px;
-      }
-      .heroTitle{
-        margin: 14px 0 8px;
-        font-size: clamp(28px, 3vw, 44px);
-        line-height: 1.12;
-        letter-spacing: .2px;
-      }
-      .heroTitle em{
-        font-style: normal;
-        color: var(--brand);
-        text-shadow: 0 0 24px rgba(245,197,66,.18);
-      }
-      .heroSub{
-        margin: 0;
-        color: var(--muted);
-        font-size: 15px;
-        max-width: 60ch;
-      }
-      .ctaRow{
-        margin-top: 18px;
-        display:flex;
-        flex-wrap:wrap;
-        gap: 10px;
-        align-items:center;
-      }
-      .btn{
-        display:inline-flex;
-        align-items:center;
-        justify-content:center;
-        gap: 10px;
-        text-decoration:none;
-        padding: 11px 14px;
-        border-radius: 14px;
-        border: 1px solid rgba(255,255,255,.14);
-        background: rgba(255,255,255,.06);
-        color: var(--text);
-        font-weight: 700;
-        font-size: 14px;
-        transition: .15s ease;
-      }
-      .btn:hover{ transform: translateY(-1px); border-color: rgba(255,255,255,.24); }
-      .btnPrimary{
-        background: linear-gradient(90deg, rgba(245,197,66,.95), rgba(245,197,66,.72));
-        border-color: rgba(245,197,66,.6);
-        color: #1a1200;
-      }
-      .btnPrimary:hover{ border-color: rgba(245,197,66,.85); }
-      .metaRow{
-        margin-top: 14px;
-        display:flex;
-        flex-wrap:wrap;
-        gap: 10px;
-        color: var(--muted);
-        font-size: 13px;
-      }
-      .meta{
-        display:inline-flex;
-        align-items:center;
-        gap: 8px;
-        padding: 8px 10px;
-        border-radius: 12px;
-        border: 1px dashed rgba(255,255,255,.14);
-        background: rgba(255,255,255,.04);
-      }
-
-      .heroAside{
-        padding: 16px;
-        display:flex;
-        flex-direction:column;
-        gap: 12px;
-      }
-      
-      /* --- BAGIAN PERBAIKAN FOTO --- */
-      .photo{
-        border-radius: 14px;
-        overflow:hidden;
-        border: 1px solid rgba(255,255,255,.12);
-        background: rgba(0,0,0,.2);
-      }
-      .photo img{
-        width:100%;
-        height: auto;          /* Mengikuti tinggi asli gambar agar tidak terpotong */
-        object-fit: contain;   /* Memastikan gambar terlihat seutuhnya secara proporsional */
-        display:block;
-      }
-      /* ----------------------------- */
-
-      .asideBox{
-        border-radius: 14px;
-        border: 1px solid rgba(255,255,255,.12);
-        background: rgba(255,255,255,.04);
-        padding: 14px;
-      }
-      .asideBox h3{
-        margin:0 0 8px;
-        font-size: 14px;
-        letter-spacing: .3px;
-        text-transform: uppercase;
-        color: rgba(232,238,252,.9);
-      }
-      .checks{
-        list-style:none;
-        padding:0;
-        margin:0;
-        display:grid;
-        gap: 8px;
-        color: var(--muted);
-        font-size: 14px;
-      }
-      .checks li{
-        display:flex;
-        gap: 10px;
-        align-items:flex-start;
-      }
-      .dot{
-        margin-top: 7px;
-        width: 9px;
-        height: 9px;
-        border-radius: 3px;
-        background: var(--brand);
-        box-shadow: 0 0 14px rgba(245,197,66,.25);
-        flex: 0 0 auto;
-      }
-
-      /* Sections */
-      section{ padding: 26px 0; }
-      .sectionTitle{
-        margin: 0 0 12px;
-        font-size: 22px;
-        letter-spacing: .2px;
-      }
-      .sectionLead{
-        margin: 0 0 16px;
-        color: var(--muted);
-        max-width: 80ch;
-      }
-
-      .grid3{
-        display:grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 14px;
-      }
-      .grid2{
-        display:grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 14px;
-      }
-
-      .tile{
-        padding: 16px;
-        border-radius: var(--radius-sm);
-        border: 1px solid rgba(255,255,255,.12);
-        background: rgba(255,255,255,.04);
-      }
-      .tile h3{ margin: 0 0 6px; font-size: 16px; }
-      .tile p{ margin: 0 0 10px; color: var(--muted); font-size: 14px; }
-      .tile ul{
-        margin: 0;
-        padding-left: 18px;
-        color: var(--muted);
-        font-size: 14px;
-        display:grid;
-        gap: 6px;
-      }
-      .icon{
-        width: 36px;
-        height: 36px;
-        border-radius: 12px;
-        display:grid;
-        place-items:center;
-        background: rgba(42,209,255,.10);
-        border: 1px solid rgba(42,209,255,.22);
-        color: rgba(232,238,252,.95);
-        margin-bottom: 10px;
-        font-weight: 900;
-        letter-spacing:.4px;
-      }
-
-      .contactWrap{
-        display:grid;
-        grid-template-columns: 1.1fr .9fr;
-        gap: 14px;
-        align-items: stretch;
-      }
-      .contactCard{
-        padding: 18px;
-      }
-      .contactCard h3{ margin: 0 0 10px; font-size: 18px; }
-      .contactList{
-        margin: 0;
-        padding: 0;
-        list-style:none;
-        display:grid;
-        gap: 10px;
-        color: var(--muted);
-      }
-      .contactList a{ color: var(--text); font-weight: 700; text-decoration:none; }
-      .contactList a:hover{ text-decoration: underline; }
-      .small{ font-size: 13px; color: var(--muted); }
-
-      footer{
-        padding: 26px 0 46px;
-        border-top: 1px solid rgba(255,255,255,.08);
-        color: rgba(232,238,252,.6);
-        font-size: 13px;
-      }
-
-      /* Responsive */
-      @media (max-width: 900px){
-        .heroGrid{ grid-template-columns: 1fr; }
-        .grid3{ grid-template-columns: 1fr; }
-        .grid2{ grid-template-columns: 1fr; }
-        .contactWrap{ grid-template-columns: 1fr; }
-      }
-    </style>
-  </head>
-  <body>
-    <header>
-      <div class="container">
-        <div class="nav">
-          <div class="brand">
-            <strong>Giri Jaya Alumindo</strong>
-            <span>Spesialis Aluminium • Kaca • Pintu Engineering • Las</span>
-          </div>
-          <nav class="navlinks" aria-label="Navigasi">
-            <a class="pill" href="#layanan">Layanan</a>
-            <a class="pill" href="#keunggulan">Keunggulan</a>
-            <a class="pill" href="#tentang">Tentang</a>
-            <a class="pill" href="#kontak">Kontak</a>
-          </nav>
-        </div>
-      </div>
-    </header>
-
-    <main>
-      <div class="hero">
-        <div class="container">
-          <div class="heroGrid">
-            <div class="card heroMain">
-              <div class="tag">Solusi lengkap aluminium & kaca</div>
-              <h1 class="heroTitle">
-                Kusen Aluminium, Kaca, Pintu Engineering &amp; Las
-                <br />
-                <em>Rapi • Kuat • Awet</em>
-              </h1>
-              <p class="heroSub">
-                Untuk rumah, kantor, maupun bangunan komersial. Kami mengutamakan kualitas bahan, presisi kerja, dan hasil akhir yang
-                bersih sesuai selera Anda.
-              </p>
-
-              <div class="ctaRow" role="group" aria-label="Aksi cepat">
-                <a class="btn btnPrimary" href="https://wa.me/6281225345030" target="_blank" rel="noopener">WhatsApp 1</a>
-                <a class="btn" href="https://wa.me/6287805461022" target="_blank" rel="noopener">WhatsApp 2</a>
-                <a class="btn" href="tel:+6281225345030">Telepon</a>
-              </div>
-
-              <div class="metaRow" aria-label="Informasi ringkas">
-                <div class="meta">Konsultasi desain: <strong style="margin-left:6px;color:var(--text)">GRATIS</strong></div>
-                <div class="meta">Garansi hasil kerja</div>
-                <div class="meta">Harga transparan &amp; terjangkau</div>
-              </div>
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-40 transition-all duration-300 py-4">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <!-- Logo -->
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 bg-gradient-to-br from-gold to-yellow-600 rounded-lg flex items-center justify-center shadow-lg">
+                    <span class="text-white font-bold text-xl">G</span>
+                </div>
+                <div>
+                    <h1 class="font-playfair text-xl font-bold text-navy">GIRI JAYA</h1>
+                    <p class="text-xs text-gray-600 tracking-widest">ALUMINDO</p>
+                </div>
             </div>
 
-            <aside class="card heroAside" aria-label="Foto & keunggulan">
-              <div class="photo">
-                <img src="./giri-jaya-sample.png" alt="Contoh pekerjaan Giri Jaya Alumindo" />
-              </div>
-              <div class="asideBox" id="keunggulan">
-                <h3>Keunggulan Kami</h3>
-                <ul class="checks">
-                  <li><span class="dot" aria-hidden="true"></span> Bahan berkualitas terbaik (standar industri)</li>
-                  <li><span class="dot" aria-hidden="true"></span> Pengerjaan rapi &amp; presisi</li>
-                  <li><span class="dot" aria-hidden="true"></span> Harga jujur, transparan, dan bisa disesuaikan kebutuhan</li>
-                  <li><span class="dot" aria-hidden="true"></span> Garansi hasil kerja &amp; respons cepat jika ada kendala</li>
-                </ul>
-              </div>
-            </aside>
-          </div>
-        </div>
-      </div>
-
-      <section id="tentang">
-        <div class="container">
-          <h2 class="sectionTitle">Tentang Kami</h2>
-          <p class="sectionLead">
-            Giri Jaya Alumindo adalah usaha berpengalaman di bidang pembuatan, pemasangan, dan perbaikan produk berbahan aluminium, kaca,
-            besi, dan stainless steel. Kami percaya bangunan yang baik tidak hanya kokoh, tetapi juga indah dan nyaman—karena itu detail
-            pekerjaan selalu kami utamakan.
-          </p>
-          <div class="grid2">
-            <div class="tile">
-              <div class="icon">01</div>
-              <h3>Rapi di detail</h3>
-              <p>Sambungan halus, finishing bersih, dan ukuran presisi agar hasil terlihat premium.</p>
-              <ul>
-                <li>Pengukuran &amp; konsultasi kebutuhan</li>
-                <li>Rekomendasi model dan material</li>
-                <li>Pengerjaan sesuai standar keamanan</li>
-              </ul>
-            </div>
-            <div class="tile">
-              <div class="icon">02</div>
-              <h3>Siap untuk proyek kecil–besar</h3>
-              <p>Dari perbaikan ringan sampai instalasi lengkap untuk rumah, ruko, maupun kantor.</p>
-              <ul>
-                <li>Estimasi jelas dan transparan</li>
-                <li>Pengerjaan cepat (sesuai kondisi lapangan)</li>
-                <li>After-service jika ada masalah pasca pemasangan</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="layanan">
-        <div class="container">
-          <h2 class="sectionTitle">Daftar Layanan Kami</h2>
-          <p class="sectionLead">
-            Berikut layanan utama yang bisa Anda pesan. Jika Anda punya contoh desain, silakan kirim—atau kami bantu buatkan rancangan yang
-            sesuai.
-          </p>
-
-          <div class="grid3">
-            <article class="tile">
-              <div class="icon">A</div>
-              <h3>Kusen Aluminium</h3>
-              <p>Berbagai ukuran, ketebalan, dan warna (putih, hitam, cokelat, perak, dll). Anti karat, ringan, kuat, dan awet.</p>
-              <ul>
-                <li>Model standar, minimalis, hingga custom</li>
-                <li>Menyesuaikan bukaan pintu/jendela</li>
-              </ul>
-            </article>
-
-            <article class="tile">
-              <div class="icon">B</div>
-              <h3>Pintu &amp; Jendela Aluminium</h3>
-              <p>Tahan panas &amp; air, tidak lapuk, mudah dirawat. Cocok untuk tampilan rumah modern.</p>
-              <ul>
-                <li>Pintu ayun, geser, lipat</li>
-                <li>Jendela geser, ayun, kisi/kotak</li>
-                <li>Kombinasi kaca bening/buram/pola</li>
-              </ul>
-            </article>
-
-            <article class="tile">
-              <div class="icon">C</div>
-              <h3>Kaca &amp; Cermin</h3>
-              <p>Pemasangan kaca untuk berbagai kebutuhan interior dan eksterior.</p>
-              <ul>
-                <li>Kaca bening, buram, patri/berpola</li>
-                <li>Kaca tebal untuk keamanan</li>
-                <li>Cermin dinding, kamar mandi, hias</li>
-                <li>Potong &amp; pasang sesuai ukuran</li>
-              </ul>
-            </article>
-
-            <article class="tile">
-              <div class="icon">D</div>
-              <h3>Pintu Engineering / Konstruksi Besi</h3>
-              <p>Untuk kebutuhan keamanan ekstra dan kekuatan tinggi.</p>
-              <ul>
-                <li>Pintu besi tempa, pintu baja, pintu anti maling</li>
-                <li>Rangka atap, tangga, penyangga</li>
-                <li>Pengelasan rapi dan tahan lama</li>
-              </ul>
-            </article>
-
-            <article class="tile">
-              <div class="icon">E</div>
-              <h3>Pagar &amp; Teralis</h3>
-              <p>Gabungan keamanan dan keindahan dengan banyak pilihan model.</p>
-              <ul>
-                <li>Aluminium (ringan &amp; anti karat)</li>
-                <li>Besi/baja (sangat kuat)</li>
-                <li>Model minimalis, klasik, atau motif khusus</li>
-              </ul>
-            </article>
-
-            <article class="tile">
-              <div class="icon">F</div>
-              <h3>Kanopi, Balkon, Railing &amp; Stainless</h3>
-              <p>Solusi pelengkap bangunan agar lebih aman, rapi, dan tahan cuaca.</p>
-              <ul>
-                <li>Kanopi aluminium / baja ringan</li>
-                <li>Atap polikarbonat atau kaca</li>
-                <li>Railing tangga, railing balkon, pembatas</li>
-                <li>Pengerjaan stainless (rak, talang, meja kerja, dll)</li>
-              </ul>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section id="kontak">
-        <div class="container">
-          <h2 class="sectionTitle">Kontak &amp; Lokasi</h2>
-          <p class="sectionLead">
-            Mau tanya harga atau konsultasi desain? Kirim ukuran/foto lokasi pemasangan via WhatsApp—kami bantu hitungkan kebutuhan dan opsi
-            materialnya.
-          </p>
-
-          <div class="contactWrap">
-            <div class="card contactCard">
-              <h3>Hubungi Kami Sekarang</h3>
-              <ul class="contactList">
-                <li>
-                  WhatsApp 1:
-                  <a href="https://wa.me/6281225345030" target="_blank" rel="noopener">0812-2534-5030</a>
-                </li>
-                <li>
-                  WhatsApp 2:
-                  <a href="https://wa.me/6287805461022" target="_blank" rel="noopener">0878-0546-1022</a>
-                </li>
-                <li>
-                  Alamat:
-                  <strong style="color:var(--text)">Jl. Pemuda RT 05/06 No. 76, Sawangan Baru</strong>
-                </li>
-              </ul>
-              <p class="small" style="margin-top:12px">
-                “Wujudkan bangunan impian Anda — kokoh, indah, dan bernilai tinggi bersama Giri Jaya Alumindo.”
-              </p>
+            <!-- Menu Desktop -->
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#home" class="text-gray-700 hover:text-navy font-medium transition-colors">Beranda</a>
+                <a href="#layanan" class="text-gray-700 hover:text-navy font-medium transition-colors">Layanan</a>
+                <a href="#portfolio" class="text-gray-700 hover:text-navy font-medium transition-colors">Portfolio</a>
+                <a href="#kontak" class="btn-primary">Hubungi Kami</a>
             </div>
 
-            <div class="card contactCard">
-              <h3>Cara Pemesanan (Singkat)</h3>
-              <ol style="margin:0; padding-left:18px; color:var(--muted); display:grid; gap:8px">
-                <li>Kirim kebutuhan + ukuran/foto lokasi via WhatsApp.</li>
-                <li>Kami rekomendasikan material &amp; model, lalu buat estimasi harga.</li>
-                <li>Survey (jika perlu) → produksi → pemasangan rapi.</li>
-                <li>Serah terima + garansi hasil kerja.</li>
-              </ol>
-              <div class="ctaRow" style="margin-top:14px">
-                <a class="btn btnPrimary" href="https://wa.me/6281225345030" target="_blank" rel="noopener">Chat WhatsApp</a>
-                <a class="btn" href="#layanan">Lihat Layanan</a>
-              </div>
-            </div>
-          </div>
+            <!-- Mobile Menu Button -->
+            <button id="mobileMenuBtn" class="md:hidden text-navy">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
         </div>
-      </section>
-    </main>
+    </nav>
 
-    <footer>
-      <div class="container">
-        <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center">
-          <div>© <span id="year"></span> Giri Jaya Alumindo. Semua hak dilindungi.</div>
-          <div>Spesialis: Aluminium • Kaca • Pintu Engineering • Las</div>
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="fixed inset-0 bg-white z-50 transform translate-x-full transition-transform duration-300 md:hidden">
+        <div class="p-6">
+            <button id="closeMobileMenu" class="absolute top-6 right-6">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <div class="flex flex-col gap-6 mt-16">
+                <a href="#home" class="text-2xl font-playfair text-navy">Beranda</a>
+                <a href="#layanan" class="text-2xl font-playfair text-navy">Layanan</a>
+                <a href="#portfolio" class="text-2xl font-playfair text-navy">Portfolio</a>
+                <a href="#kontak" class="btn-primary text-center mt-4">Hubungi Kami</a>
+            </div>
         </div>
-      </div>
+    </div>
+
+    <!-- HERO SECTION dengan 3D -->
+    <section id="home" class="relative min-h-screen flex items-center overflow-hidden">
+        <!-- Three.js Canvas Container -->
+        <div id="hero3d" class="absolute inset-0 z-0"></div>
+        
+        <!-- Gradient Overlay -->
+        <div class="absolute inset-0 bg-gradient-to-r from-white/90 via-white/70 to-transparent z-10"></div>
+
+        <!-- Content -->
+        <div class="container mx-auto px-6 relative z-20">
+            <div class="max-w-2xl">
+                <!-- Badge -->
+                <div class="inline-flex items-center gap-2 bg-gold/10 border border-gold/30 rounded-full px-4 py-2 mb-6 fade-in">
+                    <span class="w-2 h-2 bg-gold rounded-full animate-pulse"></span>
+                    <span class="text-sm font-medium text-navy">25+ Tahun Pengalaman</span>
+                </div>
+
+                <!-- Headline -->
+                <h1 class="font-playfair text-5xl md:text-6xl lg:text-7xl font-bold text-navy leading-tight mb-6 fade-in">
+                    Solusi <span class="text-gold">Aluminium</span> & Kaca Premium
+                </h1>
+
+                <!-- Subheadline -->
+                <p class="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed fade-in">
+                    Dari kusen hingga kanopi kaca, kami hadir dengan material terbaik dan pengerjaan presisi untuk kepuasan maksimal hunian dan bisnis Anda.
+                </p>
+
+                <!-- CTA Buttons -->
+                <div class="flex flex-col sm:flex-row gap-4 fade-in">
+                    <a href="https://wa.me/6281225345030?text=Halo%20Giri%20Jaya%20Alumindo,%20saya%20tertarik%20untuk%20konsultasi.%20Bisa%20dibantu?" 
+                       target="_blank"
+                       class="btn-primary flex items-center justify-center gap-2 text-lg">
+                        <i data-lucide="message-circle" class="w-5 h-5"></i>
+                        Konsultasi Gratis
+                    </a>
+                    <a href="#layanan" class="btn-secondary flex items-center justify-center gap-2">
+                        <span>Lihat Layanan</span>
+                        <i data-lucide="arrow-down" class="w-4 h-4"></i>
+                    </a>
+                </div>
+
+                <!-- Trust Badges -->
+                <div class="flex flex-wrap gap-6 mt-12 pt-8 border-t border-gray-200 fade-in">
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="shield-check" class="w-5 h-5 text-teal"></i>
+                        <span class="text-sm font-medium text-gray-600">Bergaransi</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="award" class="w-5 h-5 text-teal"></i>
+                        <span class="text-sm font-medium text-gray-600">500+ Proyek</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="clock" class="w-5 h-5 text-teal"></i>
+                        <span class="text-sm font-medium text-gray-600">Respon Cepat</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 animate-bounce">
+            <i data-lucide="chevron-down" class="w-6 h-6 text-navy/50"></i>
+        </div>
+    </section>
+
+    <!-- STATS SECTION -->
+    <section class="py-16 bg-navy text-white">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div class="stat-item">
+                    <div class="text-4xl md:text-5xl font-playfair font-bold text-gold mb-2" data-count="25">0</div>
+                    <p class="text-gray-300">Tahun Pengalaman</p>
+                </div>
+                <div class="stat-item">
+                    <div class="text-4xl md:text-5xl font-playfair font-bold text-gold mb-2" data-count="500">0</div>
+                    <p class="text-gray-300">Proyek Selesai</p>
+                </div>
+                <div class="stat-item">
+                    <div class="text-4xl md:text-5xl font-playfair font-bold text-gold mb-2" data-count="50">0</div>
+                    <p class="text-gray-300">Mitra Bisnis</p>
+                </div>
+                <div class="stat-item">
+                    <div class="text-4xl md:text-5xl font-playfair font-bold text-gold mb-2" data-count="98">0</div>
+                    <p class="text-gray-300">% Kepuasan</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LAYANAN SECTION -->
+    <section id="layanan" class="py-24 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <!-- Section Header -->
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-teal font-medium tracking-widest uppercase text-sm">Layanan Kami</span>
+                <h2 class="font-playfair text-4xl md:text-5xl font-bold text-navy mt-3 mb-4">
+                    Solusi Lengkap Aluminium & Kaca
+                </h2>
+                <p class="text-gray-600">
+                    Berbagai layanan profesional untuk memenuhi kebutuhan konstruksi dan desain interior Anda.
+                </p>
+            </div>
+
+            <!-- Services Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service Card 1 -->
+                <div class="service-card group">
+                    <div class="relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-300">
+                        <div class="h-48 bg-gradient-to-br from-navy to-blue-900 flex items-center justify-center">
+                            <i data-lucide="layout" class="w-16 h-16 text-gold group-hover:scale-110 transition-transform duration-300"></i>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-playfair text-xl font-bold text-navy mb-2">Kusen Aluminium</h3>
+                            <p class="text-gray-600 text-sm mb-4">Kusen aluminium berkualitas tinggi dengan berbagai warna dan finishing.</p>
+                            <a href="https://wa.me/6281225345030?text=Halo,%20saya%20ingin%20menanyakan%20tentang%20Kusen%20Aluminium" 
+                               target="_blank"
+                               class="text-teal font-medium flex items-center gap-1 hover:gap-2 transition-all">
+                                Pesan Sekarang <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service Card 2 -->
+                <div class="service-card group">
+                    <div class="relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-300">
+                        <div class="h-48 bg-gradient-to-br from-navy to-blue-900 flex items-center justify-center">
+                            <i data-lucide="door-open" class="w-16 h-16 text-gold group-hover:scale-110 transition-transform duration-300"></i>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-playfair text-xl font-bold text-navy mb-2">Pintu Engineering</h3>
+                            <p class="text-gray-600 text-sm mb-4">Pintu dengan desain modern dan mekanisme presisi untuk keamanan optimal.</p>
+                            <a href="https://wa.me/6281225345030?text=Halo,%20saya%20ingin%20menanyakan%20tentang%20Pintu%20Engineering" 
+                               target="_blank"
+                               class="text-teal font-medium flex items-center gap-1 hover:gap-2 transition-all">
+                                Pesan Sekarang <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service Card 3 -->
+                <div class="service-card group">
+                    <div class="relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-300">
+                        <div class="h-48 bg-gradient-to-br from-navy to-blue-900 flex items-center justify-center">
+                            <i data-lucide="square" class="w-16 h-16 text-gold group-hover:scale-110 transition-transform duration-300"></i>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-playfair text-xl font-bold text-navy mb-2">Kaca Tempered</h3>
+                            <p class="text-gray-600 text-sm mb-4">Kaca tempered berkualitas untuk keamanan dan estetika maksimal.</p>
+                            <a href="https://wa.me/6281225345030?text=Halo,%20saya%20ingin%20menanyakan%20tentang%20Kaca%20Tempered" 
+                               target="_blank"
+                               class="text-teal font-medium flex items-center gap-1 hover:gap-2 transition-all">
+                                Pesan Sekarang <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service Card 4 -->
+                <div class="service-card group">
+                    <div class="relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-300">
+                        <div class="h-48 bg-gradient-to-br from-navy to-blue-900 flex items-center justify-center">
+                            <i data-lucide="home" class="w-16 h-16 text-gold group-hover:scale-110 transition-transform duration-300"></i>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-playfair text-xl font-bold text-navy mb-2">Kanopi Kaca</h3>
+                            <p class="text-gray-600 text-sm mb-4">Kanopi kaca elegan untuk pelindung ruang outdoor Anda.</p>
+                            <a href="https://wa.me/6281225345030?text=Halo,%20saya%20ingin%20menanyakan%20tentang%20Kanopi%20Kaca" 
+                               target="_blank"
+                               class="text-teal font-medium flex items-center gap-1 hover:gap-2 transition-all">
+                                Pesan Sekarang <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service Card 5 -->
+                <div class="service-card group">
+                    <div class="relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-300">
+                        <div class="h-48 bg-gradient-to-br from-navy to-blue-900 flex items-center justify-center">
+                            <i data-lucide="stairs" class="w-16 h-16 text-gold group-hover:scale-110 transition-transform duration-300"></i>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-playfair text-xl font-bold text-navy mb-2">Rolling Tangga</h3>
+                            <p class="text-gray-600 text-sm mb-4">Tangga rolling dengan desain modern dan material tahan lama.</p>
+                            <a href="https://wa.me/6281225345030?text=Halo,%20saya%20ingin%20menanyakan%20tentang%20Rolling%20Tangga" 
+                               target="_blank"
+                               class="text-teal font-medium flex items-center gap-1 hover:gap-2 transition-all">
+                                Pesan Sekarang <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service Card 6 -->
+                <div class="service-card group">
+                    <div class="relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-300">
+                        <div class="h-48 bg-gradient-to-br from-navy to-blue-900 flex items-center justify-center">
+                            <i data-lucide="sun" class="w-16 h-16 text-gold group-hover:scale-110 transition-transform duration-300"></i>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-playfair text-xl font-bold text-navy mb-2">Awnings & Stainless</h3>
+                            <p class="text-gray-600 text-sm mb-4">Awnings dan produk stainless steel custom sesuai kebutuhan.</p>
+                            <a href="https://wa.me/6281225345030?text=Halo,%20saya%20ingin%20menanyakan%20tentang%20Awnings%20dan%20Stainless" 
+                               target="_blank"
+                               class="text-teal font-medium flex items-center gap-1 hover:gap-2 transition-all">
+                                Pesan Sekarang <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY CHOOSE US -->
+    <section class="py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <!-- Left Content -->
+                <div>
+                    <span class="text-teal font-medium tracking-widest uppercase text-sm">Mengapa Memilih Kami</span>
+                    <h2 class="font-playfair text-4xl md:text-5xl font-bold text-navy mt-3 mb-6">
+                        Kualitas yang Diakui, Pelayanan yang Terpercaya
+                    </h2>
+                    <p class="text-gray-600 mb-8 leading-relaxed">
+                        Dengan pengalaman lebih dari 25 tahun, Giri Jaya Alumindo telah menjadi pilihan utama ribuan pelanggan untuk solusi aluminium dan kaca berkualitas premium.
+                    </p>
+
+                    <!-- Features -->
+                    <div class="space-y-6">
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 bg-gold/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="check-circle" class="w-6 h-6 text-gold"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-navy mb-1">Material Premium</h4>
+                                <p class="text-gray-600 text-sm">Hanya menggunakan material berkualitas tinggi dari supplier terpercaya.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 bg-gold/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="ruler" class="w-6 h-6 text-gold"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-navy mb-1">Pengerjaan Presisi</h4>
+                                <p class="text-gray-600 text-sm">Tim ahli dengan pengalaman memastikan setiap detail sempurna.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 bg-gold/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="tag" class="w-6 h-6 text-gold"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-navy mb-1">Harga Kompetitif</h4>
+                                <p class="text-gray-600 text-sm">Penawaran terbaik dengan transparansi harga tanpa biaya tersembunyi.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 bg-gold/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="shield" class="w-6 h-6 text-gold"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-navy mb-1">Garansi 2 Tahun</h4>
+                                <p class="text-gray-600 text-sm">Jaminan kepuasan dengan garansi pemasangan dan produk.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Image -->
+                <div class="relative">
+                    <div class="absolute -inset-4 bg-gradient-to-r from-gold/20 to-teal/20 rounded-3xl blur-2xl"></div>
+                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800" 
+                         alt="Aluminium Work" 
+                         class="relative rounded-2xl shadow-2xl w-full object-cover h-[500px]">
+                    
+                    <!-- Floating Card -->
+                    <div class="absolute -bottom-6 -left-6 bg-white p-6 rounded-xl shadow-xl">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                                <i data-lucide="phone" class="w-6 h-6 text-green-600"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500">Hubungi Kami</p>
+                                <p class="font-bold text-navy">0812-2534-5030</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section id="kontak" class="py-24 relative overflow-hidden">
+        <!-- Background -->
+        <div class="absolute inset-0 bg-gradient-to-br from-navy via-blue-900 to-navy"></div>
+        <div class="absolute inset-0 opacity-10" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'0.4\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="max-w-3xl mx-auto text-center">
+                <h2 class="font-playfair text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+                    Siap Mewujudkan Proyek Anda?
+                </h2>
+                <p class="text-xl text-gray-300 mb-10 leading-relaxed">
+                    Tim ahli kami siap membantu dari konsultasi hingga instalasi. 
+                    Hubungi sekarang dan dapatkan penawaran terbaik!
+                </p>
+
+                <!-- CTA Buttons -->
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="https://wa.me/6281225345030?text=Halo%20Giri%20Jaya%20Alumindo,%20saya%20tertarik%20untuk%20konsultasi%20tentang%20proyek%20saya.%20Bisa%20dibantu?" 
+                       target="_blank"
+                       class="inline-flex items-center justify-center gap-3 bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-full text-lg font-medium transition-all hover:scale-105 shadow-lg">
+                        <i data-lucide="message-circle" class="w-6 h-6"></i>
+                        Chat WhatsApp - Respon Cepat 5 Menit
+                    </a>
+                    <a href="tel:087805461022" 
+                       class="inline-flex items-center justify-center gap-3 bg-white/10 hover:bg-white/20 text-white border border-white/30 px-8 py-4 rounded-full text-lg font-medium transition-all">
+                        <i data-lucide="phone" class="w-6 h-6"></i>
+                        Telepon Langsung
+                    </a>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="mt-12 grid sm:grid-cols-3 gap-6 text-left">
+                    <div class="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10">
+                        <i data-lucide="map-pin" class="w-8 h-8 text-gold mb-3"></i>
+                        <h4 class="font-bold text-white mb-2">Alamat</h4>
+                        <p class="text-gray-300 text-sm">Jl. Pemuda RT 05/06 No. 76 Sawangan Baru</p>
+                    </div>
+                    <div class="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10">
+                        <i data-lucide="phone" class="w-8 h-8 text-gold mb-3"></i>
+                        <h4 class="font-bold text-white mb-2">Telepon</h4>
+                        <p class="text-gray-300 text-sm">0812-2534-5030<br>0878-0546-1022</p>
+                    </div>
+                    <div class="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10">
+                        <i data-lucide="clock" class="w-8 h-8 text-gold mb-3"></i>
+                        <h4 class="font-bold text-white mb-2">Jam Operasional</h4>
+                        <p class="text-gray-300 text-sm">Senin - Sabtu<br>08:00 - 17:00 WIB</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-navy text-white py-12 border-t border-white/10">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <!-- Brand -->
+                <div class="md:col-span-2">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 bg-gradient-to-br from-gold to-yellow-600 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold text-lg">G</span>
+                        </div>
+                        <div>
+                            <h3 class="font-playfair text-lg font-bold">GIRI JAYA ALUMINDO</h3>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 max-w-sm mb-4">
+                        Solusi aluminium dan kaca premium untuk hunian dan bisnis Anda. Kualitas terjamin, harga kompetitif, pelayanan profesional.
+                    </p>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-bold mb-4">Layanan</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-gold transition-colors">Kusen Aluminium</a></li>
+                        <li><a href="#" class="hover:text-gold transition-colors">Pintu Engineering</a></li>
+                        <li><a href="#" class="hover:text-gold transition-colors">Kaca Tempered</a></li>
+                        <li><a href="#" class="hover:text-gold transition-colors">Kanopi Kaca</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <h4 class="font-bold mb-4">Kontak</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-center gap-2">
+                            <i data-lucide="phone" class="w-4 h-4"></i>
+                            0812-2534-5030
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i data-lucide="map-pin" class="w-4 h-4"></i>
+                            Sawangan Baru
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-400 text-sm">
+                    © 2024 Giri Jaya Alumindo. All rights reserved.
+                </p>
+                <div class="flex gap-4">
+                    <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-gold transition-colors">
+                        <i data-lucide="facebook" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-gold transition-colors">
+                        <i data-lucide="instagram" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-gold transition-colors">
+                        <i data-lucide="youtube" class="w-5 h-5"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
     </footer>
 
-    <script>
-      document.getElementById("year").textContent = new Date().getFullYear();
-    </script>
-
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "LocalBusiness",
-        "name": "Giri Jaya Alumindo",
-        "description": "Spesialis kusen aluminium, kaca & cermin, pintu engineering/besi, pagar & teralis, kanopi, balkon & railing, serta stainless steel.",
-        "telephone": ["+62 812-2534-5030", "+62 878-0546-1022"],
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Jl. Pemuda RT 05/06 No. 76, Sawangan Baru",
-          "addressCountry": "ID"
-        }
-      }
-    </script>
-  </body>
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+</body>
 </html>
