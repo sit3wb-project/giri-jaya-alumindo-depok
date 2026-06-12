@@ -566,19 +566,84 @@
         <div class="shape shape-3"></div>
     </div>
 
-    !-- Audio Player - Musik Seruling India Relaxing -->
-<audio id="indianFlute" preload="auto">
-    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73467.mp3?filename=indian-bansuri-11229.mp3" type="audio/mpeg">
-    <!-- Backup: Indian Flute Meditation -->
-</audio>
+    <script>
+    // Audio Player - Musik Seruling India
+    const audio = document.getElementById('indianFlute');
+    const audioBtn = document.getElementById('audioBtn');
+    const audioLabel = document.getElementById('audioLabel');
+    let isPlaying = false;
 
-<button id="audioBtn" class="audio-control">
-    <svg class="audio-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-        <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-    </svg>
-    <span id="audioLabel">Putar Musik Seruling</span>
-</button>
+    // Fungsi untuk toggle audio
+    function toggleAudio() {
+        if (isPlaying) {
+            audio.pause();
+            audioBtn.classList.remove('playing');
+            audioLabel.textContent = 'Putar Musik Seruling';
+        } else {
+            // Pastikan audio dimuat sebelum diputar
+            audio.load();
+            audio.play().then(() => {
+                audioBtn.classList.add('playing');
+                audioLabel.textContent = 'Jeda Musik';
+            }).catch(e => {
+                console.log('Audio play failed:', e);
+                // Tampilkan pesan jika autoplay diblokir
+                audioLabel.textContent = 'Klik lagi untuk memutar';
+            });
+        }
+        isPlaying = !isPlaying;
+    }
+
+    // Inisialisasi audio dengan event listener yang lebih baik
+    document.addEventListener('DOMContentLoaded', function() {
+        // Set volume ke level yang wajar (50%)
+        audio.volume = 0.5;
+        
+        // Coba preload audio
+        audio.load();
+        
+        // Event listener untuk tombol audio
+        audioBtn.addEventListener('click', toggleAudio);
+        
+        // Event listener untuk interaksi pertama
+        let audioInitialized = false;
+        function initAudioOnFirstInteraction() {
+            if (!audioInitialized) {
+                // Tampilkan indikator visual bahwa audio siap
+                audioBtn.style.animation = 'pulse 2s infinite';
+                audioLabel.textContent = 'Klik untuk musik';
+                audioInitialized = true;
+            }
+        }
+        
+        // Tambahkan event listener untuk berbagai jenis interaksi
+        document.addEventListener('click', initAudioOnFirstInteraction, { once: true });
+        document.addEventListener('touchstart', initAudioOnFirstInteraction, { once: true });
+        document.addEventListener('keydown', initAudioOnFirstInteraction, { once: true });
+    });
+
+    // Smooth scroll untuk anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+    
+    // Tambahkan animasi pulse untuk tombol audio
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    `;
+    document.head.appendChild(style);
+</script>
 
     <!-- Header -->
     <header>
