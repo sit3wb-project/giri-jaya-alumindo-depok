@@ -872,31 +872,5 @@
         }
     `;
     document.head.appendChild(style);
-</script>
-
-        // Autoplay setelah interaksi pertama
-        let audioInitialized = false;
-        document.addEventListener('click', function initAudio() {
-            if (!audioInitialized) {
-                audio.play().then(() => {
-                    isPlaying = true;
-                    audioBtn.classList.add('playing');
-                    audioLabel.textContent = 'Jeda Musik';
-                }).catch(e => console.log('Autoplay prevented:', e));
-                audioInitialized = true;
-            }
-        }, { once: true });
-
-        // Smooth scroll untuk anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
-    </script>
 </body>
 </html>
