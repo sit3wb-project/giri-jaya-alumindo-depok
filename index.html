@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giri Jaya Alumindo | Alumunium & Kaca Premium</title>
+    <meta name="description" content="Solusi Alumunium & Kaca untuk hunian & berpengalaman.">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Warna Earth Tone - Mata Friendly */
+            --cream: #f8f5f0;
+            --sand: #e8e2d9;
+            --taupe: #b8a99a;
+            --brown: #8b7355;
+            --dark: #4a4a4a;
+            --text: #5c5c5c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--cream);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Background Soft dengan Gradasi Earth Tone */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: 
+                radial-gradient(ellipse at 0% 100%, rgba(184, 169, 154, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 100% 0%, rgba(139, 115, 85, 0.1) 0%, transparent 50%),
+                linear-gradient(180deg, var(--cream) 0%, var(--sand) 100%);
+            z-index: -1;
+        }
+
+        /* Floating Soft Shapes */
+        .bg-shapes {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(139, 115, 85, 0.08), rgba(184, 169, 154, 0.05));
+            filter: blur(80px);
+        }
+
+        .shape-1 { width: 500px; height: 500px; top: -200px; right: -100px; }
+        .shape-2 { width: 400px; height: 400px; bottom: -100px; left: -100px; }
+        .shape-3 { width: 300px; height: 300px; top: 50%; left: 30%; }
+
+        /* Audio Control */
+        .audio-controls {
+            position: fixed;
+            bottom: 25px;
+            left: 25px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .audio-control {
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid var(--taupe);
+            border-radius: 50px;
+            padding: 12px 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+            color: var(--brown);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            user-select: none;
+            white-space: nowrap;
+        }
+
+        .audio-control:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(0,0,0,0.12);
+        }
+
+        .audio-control.playing {
+            background: var(--brown);
+            color: white;
+            border-color: var(--brown);
+        }
+
+        .audio-control.muted {
+            background: rgba(184, 169, 154, 0.35);
+            border-color: rgba(184, 169, 154, 0.6);
+            color: var(--dark);
+        }
+
+        .audio-icon {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(248, 245, 240, 0.95);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(184, 169, 154, 0.3);
+            z-index: 100;
+            padding: 15px 0;
+        }
+
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Logo GJA */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+        }
+
+        .logo-box {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--brown), var(--taupe));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(139, 115, 85, 0.3);
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-text .brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--dark);
+            letter-spacing: 0.5px;
+        }
+
+        .logo-text .tagline {
+            font-size: 11px;
+            color: var(--taupe);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        nav {
+            display: flex;
+            gap: 35px;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text);
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--brown);
+            transition: width 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--brown);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: var(--brown);
+            color: white !important;
+            padding: 10px 24px;
+            border-radius: 25px;
+            transition: all 0.3s !important;
+        }
+
+        .nav-cta:hover {
+            background: var(--dark);
+            transform: translateY(-2px);
+        }
+
+        .nav-cta::after {
+            display: none;
+        }
+
+        /* Main Content */
+        main {
+            padding-top: 100px;
+        }
+
+        section {
+            padding: 80px 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 100px 30px 80px;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(36px, 5vw, 56px);
+            color: var(--dark);
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: var(--brown);
+            display: block;
+        }
+
+        .hero-desc {
+            font-size: 17px;
+            color: var(--text);
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.8;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-item .number {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            color: var(--brown);
+            display: block;
+            line-height: 1;
+        }
+
+        .stat-item .label {
+            font-size: 13px;
+            color: var(--taupe);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 8px;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, var(--brown), var(--taupe));
+            color: white;
+            text-decoration: none;
+            padding: 16px 35px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.3s;
+            box-shadow: 0 8px 25px rgba(139, 115, 85, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(139, 115, 85, 0.4);
+        }
+
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+
+        .section-header p {
+            color: var(--taupe);
+            font-size: 16px;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(184, 169, 154, 0.3);
+            border-radius: 20px;
+            padding: 35px;
+            transition: all 0.4s;
+            backdrop-filter: blur(10px);
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(139, 115, 85, 0.15);
+            border-color: var(--taupe);
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--brown), var(--taupe));
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 20px rgba(139, 115, 85, 0.2);
+        }
+
+        .service-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            color: var(--dark);
+            margin-bottom: 12px;
+        }
+
+        .service-card p {
+            font-size: 14px;
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        /* Features */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 40px 25px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 20px;
+            border: 1px solid rgba(184, 169, 154, 0.2);
+            transition: all 0.3s;
+        }
+
+        .feature-item:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, var(--brown), var(--taupe));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 8px 25px rgba(139, 115, 85, 0.2);
+        }
+
+        .feature-item h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+
+        .feature-item p {
+            font-size: 13px;
+            color: var(--taupe);
+            line-height: 1.6;
+        }
+
+        /* Galeri Video dan Foto */
+        .media-section {
+            background: rgba(255, 255, 255, 0.45);
+            border: 1px solid rgba(184, 169, 154, 0.28);
+            border-radius: 30px;
+            padding: 35px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 16px 40px rgba(139, 115, 85, 0.08);
+        }
+
+        .video-shell {
+            overflow: hidden;
+            border-radius: 24px;
+            border: 1px solid rgba(184, 169, 154, 0.28);
+            background: #000;
+            box-shadow: 0 12px 30px rgba(74, 74, 74, 0.12);
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 22px;
+        }
+
+        .video-card-item {
+            background: rgba(255, 255, 255, 0.62);
+            border: 1px solid rgba(184, 169, 154, 0.25);
+            border-radius: 24px;
+            padding: 16px;
+        }
+
+        .video-shell video {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            display: block;
+            background: #000;
+        }
+
+        .media-caption {
+            margin-top: 18px;
+            color: var(--text);
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .video-title {
+            font-family: 'Playfair Display', serif;
+            color: var(--dark);
+            font-size: 22px;
+            margin-bottom: 12px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 22px;
+            cursor: pointer;
+            border: 1px solid rgba(184, 169, 154, 0.3);
+            background: rgba(255, 255, 255, 0.65);
+            min-height: 240px;
+            box-shadow: 0 10px 24px rgba(139, 115, 85, 0.1);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.35s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.06);
+        }
+
+        .gallery-item::after {
+            content: attr(data-title);
+            position: absolute;
+            left: 12px;
+            right: 12px;
+            bottom: 12px;
+            background: linear-gradient(180deg, rgba(74, 74, 74, 0.05), rgba(74, 74, 74, 0.78));
+            color: #fff;
+            padding: 10px 14px;
+            border-radius: 14px;
+            font-size: 13px;
+            letter-spacing: 0.3px;
+        }
+
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(74, 74, 74, 0.82);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            padding: 20px;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-inner {
+            width: min(920px, 100%);
+            position: relative;
+        }
+
+        .modal-image {
+            width: 100%;
+            max-height: 82vh;
+            object-fit: contain;
+            background: rgba(248, 245, 240, 0.95);
+            border-radius: 22px;
+            border: 1px solid rgba(184, 169, 154, 0.35);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(74, 74, 74, 0.75);
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .modal-text {
+            text-align: center;
+            color: #fff;
+            margin-top: 14px;
+            font-size: 14px;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, rgba(139, 115, 85, 0.1), rgba(184, 169, 154, 0.05));
+            border-radius: 30px;
+            padding: 80px 40px;
+            text-align: center;
+            margin: 0 30px;
+        }
+
+        .cta-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 40px;
+            color: var(--dark);
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            color: var(--text);
+            font-size: 16px;
+            max-width: 500px;
+            margin: 0 auto 35px;
+            line-height: 1.8;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: white;
+            color: var(--dark);
+            text-decoration: none;
+            padding: 16px 35px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 15px;
+            border: 2px solid var(--taupe);
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: var(--sand);
+            border-color: var(--brown);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--sand);
+            padding: 50px 30px;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .footer-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            text-decoration: none;
+        }
+
+        .footer-logo .logo-box {
+            width: 40px;
+            height: 40px;
+            font-size: 16px;
+        }
+
+        .footer-logo .brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            color: var(--dark);
+        }
+
+        footer p {
+            font-size: 13px;
+            color: var(--taupe);
+        }
+
+        /* WhatsApp Sticky */
+        .wa-float {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: #25d366;
+            color: white;
+            text-decoration: none;
+            padding: 15px 25px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            font-size: 14px;
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .wa-float:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(37, 211, 102, 0.5);
+        }
+
+        .wa-float svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav { display: none; }
+            .hero-stats { gap: 30px; }
+            .features-grid { grid-template-columns: 1fr; }
+            .cta-section { margin: 0 15px; padding: 60px 25px; }
+            .cta-section h2 { font-size: 28px; }
+            .media-section { padding: 22px; }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 28px; }
+            section { padding: 60px 20px; }
+            .service-card { padding: 25px; }
+            .gallery-grid { grid-template-columns: 1fr; }
+            .gallery-item { min-height: 220px; }
+        }
+
+        /* Smooth Scroll */
+        html { scroll-behavior: smooth; }
+    </style>
+</head>
+<body>
+    <!-- Background Shapes -->
+    <div class="bg-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+
+    <!-- Audio Player - Musik Seruling India Relaxing -->
+    <!-- Catatan: file MP3 Anda cukup besar, jadi preload dibuat ringan agar tidak terasa "tidak ada suara" karena sedang memuat -->
+    <audio id="indianFlute" loop preload="metadata">
+        <!-- Utama: letakkan file mp3 di folder yang sama dengan file HTML -->
+        <source src="./relaxsasi.mp3" type="audio/mpeg">
+        <!-- Cadangan: jika Anda pakai folder assets -->
+        <source src="assets/relaxsasi.mp3" type="audio/mpeg">
+        <!-- Cadangan online -->
+        <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73467.mp3?filename=indian-bansuri-11229.mp3" type="audio/mpeg">
+        Browser Anda tidak mendukung pemutar audio.
+    </audio>
+
+    <div class="audio-controls" aria-label="Kontrol musik latar">
+        <button id="audioPlayBtn" class="audio-control" type="button">
+            <svg class="audio-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+            </svg>
+            <span id="audioPlayLabel">Putar Musik Seruling</span>
+        </button>
+
+        <button id="audioMuteBtn" class="audio-control" type="button" aria-pressed="false">
+            <svg class="audio-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                <line x1="23" y1="9" x2="17" y2="15"></line>
+                <line x1="17" y1="9" x2="23" y2="15"></line>
+            </svg>
+            <span id="audioMuteLabel">Suara ON</span>
+        </button>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="header-inner">
+            <a href="#" class="logo">
+                <div class="logo-box">GJA</div>
+                <div class="logo-text">
+                    <span class="brand">GIRI JAYA</span>
+                    <span class="tagline">ALUMINDO</span>
+                </div>
+            </a>
+            <nav>
+                <a href="#layanan">Layanan</a>
+                <a href="#keunggulan">Keunggulan</a>
+                <a href="#video-galeri">Video</a>
+                <a href="#foto-galeri">Foto</a>
+                <a href="#kontak" class="nav-cta">Konsultasi</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>Wujudkan Desain <span>Alumunium & Kaca</span> Impian Anda</h1>
+            <p class="hero-desc">Solusi untuk hunian dengan material berkualitas tinggi dan pengerjaan presisi oleh tim berpengalaman </p>
+            
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="number">100+</span>
+                    <span class="label">Proyek Selesai</span>
+                </div>
+                <div class="stat-item">
+                    <span class="number">15</span>
+                    <span class="label">Tahun Pengalaman</span>
+                </div>
+                <div class="stat-item">
+                    <span class="number">1</span>
+                    <span class="label">Tahun Garansi</span>
+                </div>
+                <div class="stat-item">
+                    <span class="number">Free</span>
+                    <span class="label">Survey & Konsultasi</span>
+                </div>
+            </div>
+
+            <a href="https://wa.me/6281225345030" class="btn-primary" target="_blank">
+                Konsultasi Gratis Sekarang dengan Bapak Yatin
+            </a>
+        </section>
+
+        <!-- Layanan -->
+        <section id="layanan">
+            <div class="section-header">
+                <h2>Layanan Unggulan</h2>
+                <p>Berbagai solusi alumunium dan kaca untuk kebutuhan Anda</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🪟</div>
+                    <h3>Kusen Alumunium</h3>
+                    <p>Frame kokoh dengan finishing rapi untuk jendela dan pintu. Tersedia berbagai warna dan ukuran sesuai kebutuhan.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🚪</div>
+                    <h3>Pintu Engineering</h3>
+                    <p>Pintu premium dengan mekanisme halus, aman, dan tampilan mewah untuk hunian dan komersial.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🔷</div>
+                    <h3>Kaca Tempered</h3>
+                    <p>Kaca tempered berkualitas dengan keamanan tinggi, tahan benturan, dan efek estetika modern.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🏠</div>
+                    <h3>Kanopi Kaca</h3>
+                    <p>Struktur kanopi elegan untuk area outdoor dengan tampilan ringan namun sangat kuat.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🪜</div>
+                    <h3>Rolling Tangga</h3>
+                    <p>Solusi tangga industrial yang aman, praktis, dan estetis untuk gudang dan ruko.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">✨</div>
+                    <h3>Awnings & Stainless</h3>
+                    <p>Detail stainless steel premium yang tahan cuaca, mudah dirawat, dan menambah nilai estetika bangunan.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Keunggulan -->
+        <section id="keunggulan">
+            <div class="section-header">
+                <h2>Mengapa Memilih Kami?</h2>
+                <p>Empat pilar kualitas yang kami junjung tinggi</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">💎</div>
+                    <h3>Material Premium</h3>
+                    <p>Alumunium, kaca, dan stainless pilihan terbaik </p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📐</div>
+                    <h3>Pengerjaan Presisi</h3>
+                    <p>Detail rapi dan ukuran akurat oleh tim profesional berpengalaman</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">💰</div>
+                    <h3>Harga Kompetitif</h3>
+                    <p>Transparan dari awal tanpa biaya tersembunyi</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Garansi</h3>
+                    <p>Jaminan kualitas pemasangan dan after-sales service</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="video-galeri">
+            <div class="section-header">
+                <h2>Galeri Video</h2>
+                <p>Video dokumentasi ditampilkan langsung di dalam website agar mudah dilihat oleh pengunjung.</p>
+            </div>
+            <div class="media-section">
+                <div class="video-grid">
+                    <div class="video-card-item">
+                        <h3 class="video-title">Video 1</h3>
+                        <div class="video-shell">
+                            <video controls preload="metadata" poster="assets/images/foto-saya-4.png">
+                                <source src="assets/videos/foto-saya.mp4" type="video/mp4">
+                                Browser Anda tidak mendukung pemutar video HTML5.
+                            </video>
+                        </div>
+                        <p class="media-caption">Video pertama yang sebelumnya sudah ada di website.</p>
+                    </div>
+
+                    <div class="video-card-item">
+                        <h3 class="video-title">Video 2</h3>
+                        <div class="video-shell">
+                            <video controls preload="metadata" poster="assets/images/foto-saya-5.png">
+                                <source src="assets/videos/video-saya.mp4" type="video/mp4">
+                                Browser Anda tidak mendukung pemutar video HTML5.
+                            </video>
+                        </div>
+                        <p class="media-caption">Video baru yang Anda unggah kini sudah tergabung di website.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="foto-galeri">
+            <div class="section-header">
+                <h2>Galeri Foto</h2>
+                <p>Kumpulan foto proyek atau dokumentasi yang bisa dibuka dalam tampilan besar saat diklik.</p>
+            </div>
+            <div class="media-section">
+                <div class="gallery-grid">
+                    <figure class="gallery-item" data-title="Foto 1" data-full="assets/images/foto-saya-1.png">
+                        <img src="assets/images/foto-saya-1.png" alt="Foto 1">
+                    </figure>
+                    <figure class="gallery-item" data-title="Foto 2" data-full="assets/images/foto-saya-2.png">
+                        <img src="assets/images/foto-saya-2.png" alt="Foto 2">
+                    </figure>
+                    <figure class="gallery-item" data-title="Foto 3" data-full="assets/images/foto-saya-3.png">
+                        <img src="assets/images/foto-saya-3.png" alt="Foto 3">
+                    </figure>
+                    <figure class="gallery-item" data-title="Foto 4" data-full="assets/images/foto-saya-4.png">
+                        <img src="assets/images/foto-saya-4.png" alt="Foto 4">
+                    </figure>
+                    <figure class="gallery-item" data-title="Foto 5" data-full="assets/images/foto-saya-5.png">
+                        <img src="assets/images/foto-saya-5.png" alt="Foto 5">
+                    </figure>
+                    <figure class="gallery-item" data-title="Foto 6" data-full="assets/images/foto-saya-6.png">
+                        <img src="assets/images/foto-saya-6.png" alt="Foto 6">
+                    </figure>
+                    <figure class="gallery-item" data-title="Foto 7" data-full="assets/images/foto-saya-7.png">
+                        <img src="assets/images/foto-saya-7.png" alt="Foto 7">
+                    </figure>
+                    <figure class="gallery-item" data-title="Foto 8" data-full="assets/images/foto-saya-8.png">
+                        <img src="assets/images/foto-saya-8.png" alt="Foto 8">
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section id="kontak">
+            <div class="cta-section">
+                <h2>Siap Mewujudkan Proyek Anda?</h2>
+                <p>Kami siap membantu dari konsultasi, survey, hingga instalasi. Hubungi sekarang dan dapatkan penawaran terbaik!</p>
+                <div class="btn-group">
+                    <a href="https://wa.me/6281225345030" class="btn-primary" target="_blank">
+                        Chat WhatsApp
+                    </a>
+                    <a href="https://wa.me/6287805461022" class="btn-secondary" target="_blank">
+                        Telepon Langsung
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <a href="#" class="footer-logo">
+            <div class="logo-box">GJA</div>
+            <span class="brand">GIRI JAYA ALUMINDO</span>
+        </a>
+        <p>&copy; 2025 Giri Jaya Alumindo. All rights reserved.</p>
+    </footer>
+
+    <div class="modal" id="imageModal" aria-hidden="true">
+        <div class="modal-inner">
+            <button class="modal-close" id="closeModal" type="button" aria-label="Tutup">×</button>
+            <img class="modal-image" id="modalImage" src="" alt="">
+            <div class="modal-text" id="modalText"></div>
+        </div>
+    </div>
+
+    <!-- WhatsApp Floating -->
+    <a href="https://wa.me/6281225345030" class="wa-float" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        Chat WhatsApp
+    </a>
+
+    <script>
+        // Audio Player - Musik Seruling India
+        const audio = document.getElementById('indianFlute');
+        const playBtn = document.getElementById('audioPlayBtn');
+        const playLabel = document.getElementById('audioPlayLabel');
+        const muteBtn = document.getElementById('audioMuteBtn');
+        const muteLabel = document.getElementById('audioMuteLabel');
+        const modal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        const modalText = document.getElementById('modalText');
+        const closeModal = document.getElementById('closeModal');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+
+        function updatePlayUI() {
+            const playing = !audio.paused;
+            playBtn.classList.toggle('playing', playing);
+            playLabel.textContent = playing ? 'Jeda Musik' : 'Putar Musik Seruling';
+        }
+
+        function updateMuteUI() {
+            const muted = audio.muted || audio.volume === 0;
+            muteBtn.classList.toggle('muted', muted);
+            muteBtn.setAttribute('aria-pressed', muted ? 'true' : 'false');
+            muteLabel.textContent = muted ? 'Suara OFF' : 'Suara ON';
+        }
+
+        function setPlayStatus(text) {
+            if (text) playLabel.textContent = text;
+        }
+
+        async function togglePlay() {
+            if (!audio.paused) {
+                audio.pause();
+                return;
+            }
+
+            try {
+                setPlayStatus('Memuat musik...');
+                audio.load(); // paksa browser memilih source & mulai memuat
+                await audio.play(); // harus dipicu oleh klik user agar tidak diblokir browser
+            } catch (e) {
+                console.log('Audio play failed:', e);
+                setPlayStatus('Gagal memutar (cek file mp3)');
+            }
+        }
+
+        function toggleMute() {
+            audio.muted = !audio.muted;
+            updateMuteUI();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set volume ke level wajar
+            audio.volume = 0.5;
+            updatePlayUI();
+            updateMuteUI();
+
+            // Penting: jangan pasang handler dobel (sebelumnya ada onclick + addEventListener)
+            playBtn.addEventListener('click', togglePlay);
+            muteBtn.addEventListener('click', toggleMute);
+
+            audio.addEventListener('play', updatePlayUI);
+            audio.addEventListener('pause', updatePlayUI);
+            audio.addEventListener('volumechange', updateMuteUI);
+
+            // Status loading/error supaya jelas kalau file besar sedang memuat
+            audio.addEventListener('waiting', () => setPlayStatus('Memuat musik...'));
+            audio.addEventListener('canplay', () => updatePlayUI());
+            audio.addEventListener('playing', () => updatePlayUI());
+            audio.addEventListener('error', () => {
+                console.log('Audio error:', audio.error);
+                setPlayStatus('Audio tidak ditemukan / tidak bisa diputar');
+            });
+        });
+
+        function openModal(src, title, altText) {
+            modalImage.src = src;
+            modalImage.alt = altText;
+            modalText.textContent = title;
+            modal.classList.add('show');
+            modal.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function hideModal() {
+            modal.classList.remove('show');
+            modal.setAttribute('aria-hidden', 'true');
+            modalImage.src = '';
+            document.body.style.overflow = '';
+        }
+
+        galleryItems.forEach((item) => {
+            item.addEventListener('click', () => {
+                const image = item.querySelector('img');
+                openModal(item.dataset.full, item.dataset.title, image.alt);
+            });
+        });
+
+        closeModal.addEventListener('click', hideModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                hideModal();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('show')) {
+                hideModal();
+            }
+        });
+
+        // Smooth scroll untuk anchor links
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
